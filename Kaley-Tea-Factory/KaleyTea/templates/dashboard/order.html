@@ -1,0 +1,42 @@
+{% extends "InventorySystem/sideorder.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Order Page {% endblock %}
+
+{% block content %}
+
+
+
+<!-----------------------------Create Inventory Order Page-------------------------------------->
+
+<div class="row my-4 col-md-10" style="margin-left:100px">
+    <div class="card card-body text-white">
+            <h2 class="text-info text-left"><b>Inventory Order Details</b></h2>
+            <hr class="text-dark">
+        <div class="col-md-12">
+            <table class="table bg-white table-striped text-dark">
+                <thead class="bg-success text-white">
+                    <tr>
+                        <th scope="col">Category</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Ordered by</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for orders in orders %}
+                    <tr>
+                        <td>{{ orders.leaves_category }}</td>
+                        <td>{{ orders.order_quantity }}</td>
+                        <td>{{ orders.staff.username }}</td>
+                        <td>{{ orders.date }}</td>
+                        <td>{{ orders.time }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "InventorySystem/sideorder.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Staff Index Page {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-----------------------------Create Inventory Dashboard Page-------------------------------------->
+<div>
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    Make Request
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <br>
+                        <center><input class="btn btn-info btn-block" type="submit" value="Make Request"></center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

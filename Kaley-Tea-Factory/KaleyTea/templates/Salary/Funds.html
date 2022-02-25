@@ -1,0 +1,47 @@
+{% extends 'Salary/BaseMenu.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block contentHeader %}
+
+<html lang="en">
+{% include 'CommonUse/messages.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>Funds</title>
+    <link rel="stylesheet" href="{% static 'css/Salary.css' %}">
+    <script src="{% static 'js/Salary.js' %}"></script>
+</head>
+<body>
+    <h1 style="color: #4caf50">Funds</h1>
+    <div class="table-wrapper">
+     <table class="fl-table">
+        <thead>
+         <tr>
+             <th>F_ID</th>
+             <th>Date</th>
+             <th>ETF</th>
+             <th>EPF_Employee</th>
+             <th>EPF_Employer</th>
+         </tr>
+        </thead>
+        {% for fund in funds%}
+        <tr>
+            <td>{{ fund.id }}</td>
+            <td>{{ fund.date }}</td>
+            <td>{{ fund.emp_etf }}</td>
+            <td>{{ fund.epf_employee}}</td>
+            <td>{{ fund.epf_employer}}</td>
+        </tr>
+
+    </table>
+    </div>
+
+    <button class="button button-edit-div">
+        <a href="/Employee/Salary/change_rates{{ fund.id }}" class="link_button">Change Rates</a>
+    </button>
+    {% endfor %}
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'Transport_templates/transportationBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Transportation Management{% endblock title %}
+
+<!-------------------------Styles------------------------->
+    {% block moreStyles %}
+
+
+table
+    {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 80%;
+    }
+
+
+    td
+    {
+      border: 1px solid #c5f1b8;
+      text-align: left;
+      font-size: 20px;
+      padding: 15px;
+    }
+
+    tr:nth-child(even)
+    {
+      background-color: #c5f1b8;
+    }
+
+
+
+.regButton {
+    background-color: green;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+       .regButton:hover {
+  background-color: #000000;
+  color: green;
+}
+ .container1
+{
+    min-width: 500px;
+    width: 80%;
+}
+
+.container1
+{
+    margin-top: 20px;
+    margin-left: 100px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+.container2
+{
+    margin-left:50px;
+    padding: 50px;
+}
+
+.container2 th
+{
+    background-color:#f5e57f ;
+}
+
+ h2 {
+      color: #082c88;
+    }
+.ClassActive {
+    background-color: #8db8e0;
+}
+
+.ClassActive1 {
+    background-color: #2292CF;
+    color: white;
+}
+
+
+    {% endblock moreStyles %}
+
+<!-------------------------Body Menue------------------------->
+ {% block repairsBtn %}ClassActive{% endblock repairsBtn %}
+
+<!-----------------------------------Header1-------------------------------------->
+{% block pageContentHeader1 %}Transportation Management{% endblock pageContentHeader1 %}
+
+<!----------------------------------Header2--------------------------------------->
+{% block pageContentHeader2 %}Update Repairs{% endblock pageContentHeader2 %}
+
+<!----------------------------------Hide Menues--------------------------------------->
+{% block vehicleRecordsMenu %}{% endblock vehicleRecordsMenu %}
+
+<!-------------------------Body Sub Menue------------------------->
+{% block repairTableBtn %}ClassActive1{% endblock repairTableBtn %}
+
+<!----------------------------------Body Content--------------------------------------->
+{% block content %}
+    <br><br>
+
+ <!---------------------------------Messages-------------------------------------->
+    {% if messages %}
+       {% for message in messages %}
+          <script>alert("{{ message }}");</script>
+    {% endfor %}
+    {% endif %}
+
+
+  <!--Update Vehicle Repairs Form-->
+  <div style="padding-left: 20px;">
+  <h2><b>Update Repair Details</b></h2>
+  <div class="container1">
+      <table style=" padding: 20px 20px 20px 20px; background-color: #c5f1b8;" >
+
+          <form action="{% url 'update_repair_records' %}" method="post">
+
+              {% csrf_token %}
+
+              <input type = "hidden" name="repairID" value="{{ ReId }}"/>
+
+
+              <tr>
+                  <td style="padding-bottom: 10px;"><b><label for="billno" style="font-size: 20px;">Bill No:</label></b></td>
+                  <td>&emsp;{{ REform.Bill_No }}</td>
+              </tr>
+
+              <tr>
+                  <td style="padding-bottom: 10px;"><b><label for="vehicleno" style="font-size: 20px;">Vehicle No:</label></b></td>
+                  <td>&emsp;{{ REform.VehicleNo }}</td>
+              </tr>
+
+              <tr>
+                  <td style="padding-bottom: 10px;"><b><label for="description" style="font-size: 20px;">Description:</label></b></td>
+                  <td>&emsp;{{ REform.Description }}</td>
+              </tr>
+
+              <tr>
+                  <td style="padding-bottom: 10px;"><b><label for="servicedate" style="font-size: 20px;">Service Date:</label></b></td>
+                  <td>&emsp;{{ REform.Service_Date }}</td>
+              </tr>
+
+              <tr>
+                  <td style="padding-bottom: 10px;"><b><label for="amount" style="font-size: 20px;">Amount:</label></b></td>
+                  <td>&emsp;{{ REform.Amount }}</td>
+              </tr>
+
+
+              <tr>
+                  <td></td>
+                  <td>
+                      <div class="container2">
+                          <input class="regButton" type="submit" value="Update" ></div>
+              </tr>
+
+          </form>
+      </table>
+
+
+  </div>
+  </div>
+
+
+{% endblock content %}

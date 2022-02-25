@@ -1,0 +1,45 @@
+{% extends 'Salary/BaseMenu.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block contentHeader %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Allowance</title>
+    <link rel="stylesheet" href="{% static 'css/Salary.css' %}">
+    <script src="{% static 'js/Salary.js' %}"></script>
+</head>
+<body>
+    <h3 style="color: #4caf50"> ADD NEW ALLOWANCE </h3>
+    <br><br><br><br>
+
+    <div class="float-container">
+    <!----------------------------------------Search Form------------------------------------------->
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <label>Employee ID   :</label>
+            {{ allowance.emp_id }}
+            <br><br>
+
+            <label>Allowance by price    :</label>
+            {{ allowance.allowance_by_price }}
+            <br><br>
+
+            <label>Incentive 1   :</label>
+            {{ allowance.incentive_1 }}
+            <br><br>
+
+            <label>Incentive 2</label>
+            {{ allowance.incentive_2 }}
+            <br><br>
+            <button type="submit" class="button button-edit-div" id="AllowBtn">SUBMIT</button>
+        </form>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

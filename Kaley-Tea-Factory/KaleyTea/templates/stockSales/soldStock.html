@@ -1,0 +1,205 @@
+{% extends 'auctionStocks/auctionStocksMain.html' %}
+{% load widget_tweaks %}
+{% block contentHeader %}
+{% load static %}
+<header><h2> Final Production Management</h2></header>
+<p>Stock Sales | Sold Stocks</p>
+<link rel="stylesheet" href="{% static 'css/PrepareCatelog.css' %}">
+
+<hr/>
+<ul>
+  <li><a href="/stock/stock/">Current Stock</a></li>
+  <li><a href="/readSoldStock/readSoldStock/">Sold Stock Details</a></li>
+  <li><a href="/readnotSoldStock/readnotSoldStock/">Not Sold Stock Details</a></li>
+  <li><a href="/BuyerRead/BuyerRead/">Buyer Details</a></li>
+</ul>
+<hr/>
+
+
+
+<style>
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #4CAF50;
+}
+
+
+
+p {
+  font-size: 35px;
+  color:red;
+}
+
+p3 {
+  font-size: 30px;
+}
+
+table, td, th {
+  border: 1px solid #ddd;
+  text-align: left;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+input[type=number], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+
+
+</style>
+
+
+
+
+    <hr/>
+    <p3>Add Sold Stocks </p3>
+    <hr/>
+
+
+<div class="container">
+      <form method = "POST" action="/soldstock/soldstock/{{auction.id}}">
+      {% csrf_token %}
+
+    <div class="row">
+      <div class="col-25">
+        <label for="id">Company ID</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="id" name="id" placeholder="Enter Buyer Company Name..." value="{{auction.id}}" readonly>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="stockID">Stock ID</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="stockID" name="stockID" placeholder="Enter Stock ID..." value="{{auction.stockID}}" readonly>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="teacat">Tea Category</label>
+      </div>
+
+      <div class="col-75">
+        <select id="teacat" name="teacat">
+          <option value="opa">OPA</option>
+          <option value="op">OP</option>
+          <option value="bop">BOP</option>
+          <option value="bopf">BOPF</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="totWeight">Total Weight</label>
+      </div>
+
+      <div class="col-75">
+        <input type="text" id="totWeight" name="totWeight" placeholder="Enter total weight..." value="{{auction.totWeight}}" required>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="packages">No of Packages</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="packages" name="packages" placeholder="Enter no of packages.." value="{{auction.packages}}" required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="Cname">Company Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="Cname" name="Cname" placeholder="Enter Company Name.." required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="regNO">Register ID</label>
+      </div>
+      <div class="col-75">
+        <input type="number" id="regNo" name="regNo" placeholder="Enter register no... (Format should be xxxx )" min="1000" max="9999" required>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="datePrepared">Date Sold</label>
+      </div>
+      <div class="col-75">
+          <input type="date" id="datePrepared" name="datePrepared" value="{{auction.datePrepared}}" required>
+      </div>
+    </div>
+<br/>
+    <div class="row">
+
+      <input type="submit" value="Add sold stock details">
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    <h2 style = "color:green;">{{message}}</h2>
+    {% endfor %}
+    {% endif %}
+  </form>
+
+
+</div>
+
+
+
+
+{% endblock %}

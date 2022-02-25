@@ -1,0 +1,166 @@
+{% extends 'EmployeeManagement_templates/employeeBase.html' %}
+
+<!-------------title--------------->
+{% block title %}View Employee{% endblock title %}
+
+<!-------------styles--------------->
+{% block moreStyles %}
+.addButton{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.deleteButton{
+    background-color: red; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+{% endblock moreStyles %}
+
+{% block pageContentHeader2 %}View Employee{% endblock pageContentHeader2 %}
+
+{% block content %}
+
+
+  <div class="w3-container" style="margin-top:0px" id="showcase">
+
+<form method="post" action="{% url 'view_employee' %}">
+    {% csrf_token %}
+
+
+          <h2 class="w3-xxxlarge w3-text-red"><b>{{ employee.name }}</b></h2>
+
+          <div class="row">
+          <div class="column">
+              <table style="padding: 20px 20px 20px 20px; background-color:#ffff;">
+                  <h2><b>General Information</b></h2>
+                  <tr>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <td><label for="dob"><b>Date of Birth :</b></label></td>
+                      <td>{{ employee.dob }}</td>
+                  </tr>
+                  <tr>
+                      <td><label for="gender"><b>Gender :</b></label></td>
+                      <td>{{ employee.gender }}</td>
+                  </tr>
+                  <tr>
+                      <td><label for="maritalStatus"><b>Marital Status :</b></label></td>
+                      <td>{{ employee.maritalStatus }}</td>
+                  </tr>
+                  <tr>
+                      <td><label for="doa"><b>Date of Approval :</b></label></td>
+                      <td>{{ employee.doa }}</td>
+                  </tr>
+                  <tr>
+                      <td><label for="empgroup"><b>Employee Group :</b></label></td>
+                      <td>{{ employee.empGroup }}</td>
+                  </tr>
+                  <tr>
+                      <td><label for="emptype"><b>Employee Type :</b></label></td>
+                      <td>{{ employee.empType }}</td>
+                  </tr>
+                  <tr>
+                      <td><label for="designation"><b>Designation :</b></label></td>
+                      <td>{{ employee.designation }}</td>
+                  </tr>
+                  <tr>
+                      <td><label for="basicsalary"><b>Basic Salary :</b></label></td>
+                      <td>{{ employee.basicSalary }}</td>
+                  </tr>
+              </table>
+          </div>
+
+          <div class="column">
+          <table style="padding: 20px 20px 20px 20px; background-color:#ffff;">
+              <tr>
+                  <th></th>
+                  <th></th>
+              </tr>
+              <tr>
+                  <td><label for="name"><b>EPF No :</b></label></td>
+                  <td>{{ employee.epfNo }}</td><br>
+              </tr>
+              <tr>
+                  <td><label for="nic"><b>NIC No :</b></label></td>
+                  <td>{{ employee.nic }}</td>
+              </tr>
+          </table>
+          <table style="padding: 20px 20px 20px 20px; background-color:#ffff;">
+          <tr>
+              <h2><b>Contact Information</b></h2>
+          </tr>
+          <tr>
+              <td><label for="phone"><b>Contact No :</b></label></td>
+              <td>{{ employee.contactNo }}</td>
+          </tr>
+          <tr>
+              <td><label for="address"><b>Address :</b></label></td>
+              <td>{{ employee.address }}</td>
+          </tr>
+
+        </table>
+    </div>
+   </div>
+
+</form>
+    <br><br>
+{#    <div>#}
+{##}
+{#        <table>#}
+{#            <tr>#}
+{#            <form method="post" action="{% url 'update_employee' %}">#}
+{#                {% csrf_token %}#}
+{#                <input type="hidden" name="empID" value="{{ employee.id }}">#}
+{#                <input type="submit" value="edit" class="addButton">#}
+{#            </form>#}
+{##}
+{#             <form method="post" action="{% url 'delete_employee' %}">#}
+{#                {% csrf_token %}#}
+{#                <input type="hidden" name="empID" value="{{ employee.id }}">#}
+{#                <input type="submit" value="delete" class="deleteButton" onclick="if(!confirm('Are you sure you want to delete? Press OK to confirm')){return false}">#}
+{#            </form>#}
+{#            </tr>#}
+{#            </table>#}
+{#        </div>#}
+        </div>
+    </div>
+{% endblock content %}

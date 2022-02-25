@@ -1,0 +1,54 @@
+{% extends 'Outlet_Stock/shopInventoryBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Tea Shop Inventory Management{% endblock title %}
+
+<!-------------------------Head------------------------->
+    {% block headImport %}
+
+    {% endblock headImport %}
+
+{% block pageContentHeader1 %}Sales Inventory Management{% endblock pageContentHeader1 %}
+
+{% block pageContentHeader2 %}Edit Tea Pakctes{% endblock pageContentHeader2 %}
+
+{% block viewteabtn %}ClassActive{% endblock viewteabtn %}
+
+{% block content %}
+
+<!-- form -->
+    <br>
+    <form method="post" action="{% url 'updatepackets' %}">
+        {% csrf_token %}
+         <table>
+        <tr class="form-group" style="background-color:#FFFFE0;">
+            <td style="text-align: left;"> <label>Date:</label> </td>
+            <td style="text-align: left;">{{ packet.date }} </td>
+        </tr>
+        <br>
+        <tr class="form-group" style="background-color:#FFFFE0;">
+            <td style="text-align: left;"><label>Tea Category:</label> </td>
+            <td style="text-align: left;"> {{ category }} </td>
+        </tr>
+        <br>
+        <tr class="form-group" style="background-color:#FFFFE0;">
+            <td style="text-align: left;"><label>Category Weight:</label> </td>
+            <td style="text-align: left;">{{ weight }} </td>
+        </tr>
+         </table>
+        <br><br>
+        <div class="form-group">
+            <label >Number of packets:</label>
+            <input type="number" name="noPkts" value="{{ packet.noOfPackets }}">
+        </div>
+        <br>
+        <div class="form-group">
+
+            <input type="hidden" name="packetID" value="{{ packet.id }}">
+
+            <input type="submit" class="btn1" value="Update">
+        </div>
+        <br>
+    </form>
+    <!-- End page content -->
+{% endblock content %}

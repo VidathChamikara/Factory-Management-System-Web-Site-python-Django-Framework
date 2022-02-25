@@ -1,0 +1,59 @@
+{% extends 'Outlet_Stock/shopInventoryBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Tea Shop Inventory Management{% endblock title %}
+
+<!-------------------------Head------------------------->
+{% block headImport %}
+
+{% endblock headImport %}
+
+{% block pageContentHeader1 %}Sales Inventory Management{% endblock pageContentHeader1 %}
+
+{% block pageContentHeader2 %}Edit Category Product{% endblock pageContentHeader2 %}
+
+{% block levelbtn %}ClassActive{% endblock levelbtn %}
+
+{% block content %}
+    <!-- form -->
+
+    <form method="post" action="{% url 'updateategoryProduct' %}">
+
+        {%  csrf_token %}
+
+
+
+        <input type="hidden" name="cpID" value="{{ cpID }}">
+        <table>
+        <tr class="form-group" style="background-color:#FFF0F5;">
+            <td style="text-align: left;"><label style="font-weight: 700;">Category Product Name: </label> </td>
+            <td style="text-align: left;">{{ cpForm.cp_name }} </td>
+            <br>
+        </tr>
+
+        <tr class="form-group" style="background-color:#FFF0F5;">
+            <td style="text-align: left;"><label style="font-weight: 700;">Tea Category: </label> </td>
+            <td style="text-align: left;">{{ cpForm.category }} </td>
+            <br>
+        </tr>
+
+        <tr class="form-group" style="background-color:#FFF0F5;">
+            <td style="text-align: left;"><label style="font-weight: 700;">Category Weight: </label> </td>
+            <td style="text-align: left;">{{ cpForm.weight }} </td>
+            <br>
+        </tr>
+        </table>
+
+        <br>
+        <div class="form-group">
+
+            <button type="submit" class="btn1"  style="padding: 6px 25px;">SAVE</button>
+
+        </div>
+        <br>
+    </form>
+    <!-- End page content -->
+    </div>
+
+
+{% endblock content %}

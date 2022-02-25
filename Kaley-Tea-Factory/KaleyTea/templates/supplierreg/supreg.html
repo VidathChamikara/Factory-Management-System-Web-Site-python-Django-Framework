@@ -1,0 +1,132 @@
+{% extends 'supplierreg/suppliermain.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block contentHeader %}
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+}
+
+* {
+
+    box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: #4caf50;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+  background-color: red;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+.reg{
+     border-radius: 25px;
+     background-color:05396d;
+     width:1000px;
+     padding:20px;
+     margin:20px
+     box-shadow:100px 100px 100px;
+}
+</style>
+</head>
+<body>
+<center>
+    {% if messages %}
+      {% for message in messages %}
+      <h2 style="color: red;">{{message}}</h2>
+      {% endfor %}
+      {% endif %}
+<div class="reg">
+<form action="#" target="_self" method="POST" onsubmit=""  >
+         {% csrf_token %}
+
+  <div class="container">
+
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+       <label><b>Full Name</b></label><br>
+       <input type="text" idname="Fullname" name="Fullname" style="width:600px;" placeholder="Enter Your Full name" required><br><br>
+       <label><b>NIC No</b></label><br>
+       <input type="text" idname="Nicno" name="Nicno" style="width:600px;" placeholder="Enter Your NIC No" required><br><br>
+       <label><b>Address</b></label><br>
+       <input type="text" idname="Address" name="Address" style="width:600px;" placeholder="Enter Your Address" required><br><br>
+       <label><b>Date Of Birth</b></label><br>
+       <input type="date" idname="Dob" name="Dob" required><br><br>
+       <label><b>Email Address</b></label><br>
+       <input type="text" idname="Email" name="Email" style="width:600px;" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9]+\.[a-z]{1,3}" placeholder="Ex:myname@exampie.com" required><br><br>
+       <label><b>Contact Number</b></label><br>
+       <input type="text" idname="Contactnum" name="Contactnum" style="width:600px;" placeholder="Enter Your Contact Number" required><br><br>
+       <label><b>Payment type</b></label><br>
+       <input type="text" idname="Paymenttype" name="Paymenttype" style="width:600px;" placeholder="Enter Your Payment Type" required><br><br>
+
+       <label><b>Bank Name</b></label><br>
+       <input type="text" idname="Bank" name="Bank" style="width:600px;" placeholder="Enter Your Bank Name" required><br><br>
+       <label><b>Account No</b></label><br>
+       <input type="text" idname="Accountnum" name="Accountnum" style="width:600px;" placeholder="Enter Your Account No" required><br><br>
+       <button type="submit" class="registerbtn">Register</button>
+
+
+  </div>
+
+
+
+</form>
+</div>
+</center>
+
+</body>
+</html>
+{% endblock %}

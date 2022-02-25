@@ -1,0 +1,84 @@
+{% load static %}
+<!--Dashboard Display-->
+<div class="row">
+    <div class="col-md-12 mt-4">
+        <div class="card">
+            <div class="card-header bg-light text-danger text-center">
+                <h1>Tea Factory</h1>
+                <div class="card-body text-center">
+                    <img src="{% static 'images/tea.png' %}" style="height:100px;"/>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="text-decoration-none text-dark" href="/Factory/EmployeeHome/selectAttendence" >
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <img src="{% static 'images/emp.png' %}" style="height:100px;"/>
+                                    <h4> Employee Management <i class="fas fa-users"></i></h4>
+
+                                </div>
+                            </div>
+                        </a>
+                   <br>
+                        <a class="text-decoration-none text-dark" href="{% url 'login' %}">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <img src="{% static 'images/inventory.png' %}" style="height:100px;"/>
+                                    <h4> Inventory Management <i class="fas fa-box"></i></h4>
+
+                                </div>
+                            </div>
+                        </a>
+                   <br>
+
+                        <br>
+                        <a class="text-decoration-none text-dark" href="/Supplier/Reg/supplierReg">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <img src="{% static 'images/supplier.png' %}" style="height:100px;"/>
+                                    <h4> Supplier Management <i class="fas fa-box"></i></h4>
+
+                                </div>
+                            </div>
+                        </a>
+                   <br>
+                         <br>
+                        <a class="text-decoration-none text-dark" href='/Employee/Salary/FullDetails/'>
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <img src="{% static 'images/sal.png' %}" style="height:100px;"/>
+                                    <h4> Salary Management <i class="fas fa-box"></i></h4>
+
+                                </div>
+                            </div>
+                        </a>
+                        <br>
+                        <a class="text-decoration-none text-dark" href="/allcat/cat/">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <img src="{% static 'images/finalproduct.png' %}" style="height:100px;"/>
+                                    <h4> Final Production Management <i class="fas fa-box"></i></h4>
+
+                                </div>
+                            </div>
+                        </a>
+                   <br>
+                        <a class="text-decoration-none text-dark" href="/Factory/Transport/">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <img src="{% static 'images/transport.png' %}" style="height:100px;"/>
+                                    <h4> Transport Management <i class="fas fa-shipping-fast"></i></h4>
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--End display-->

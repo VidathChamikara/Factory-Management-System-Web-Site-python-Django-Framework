@@ -1,0 +1,194 @@
+{% extends 'auctionStocks/auctionStocksMain.html' %}
+{% load widget_tweaks %}
+{% block contentHeader %}
+{% load static %}
+<header><h2> Final Production Management</h2></header>
+
+<p> Auction Stock | Prepare Catalog</p>
+<link rel="stylesheet" href="{% static 'css/PrepareCatelog.css' %}">
+
+<hr/>
+<ul>
+  <li><a href="/cat/cat/">Prepare A Catalog</a></li>
+  <li><a href="/allcat/all/">Auction Details</a></li>
+  <li><a href="/BuyerRead/BuyerRead/">Buyer Details</a></li>
+</ul>
+<hr/>
+
+
+
+<style>
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #4CAF50;
+}
+
+
+
+p {
+  font-size: 35px;
+  color:red;
+}
+
+p3 {
+  font-size: 30px;
+}
+
+table, td, th {
+  border: 1px solid #ddd;
+  text-align: left;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+th, td {
+  text-align: left;
+  padding: 2px;
+  text-align: center;
+}
+th {
+  font-size: 17px;
+}
+td {
+  font-size: 17px;
+}
+
+label {
+  font-size: 20px;
+}
+
+
+tl {
+  border-style: solid;
+  border-width: 1px .5px;
+}
+
+input[type=number], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+</style>
+
+
+    <hr/>
+    <p3>Add Main Auction Stock(Catalog)</p3>
+    <hr/>
+
+
+<div class="container">
+      <form method = "POST">
+      {% csrf_token %}
+
+    <div class="row">
+      <div class="col-25">
+        <label for="stockID">Stock ID</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="stockID" name="stockID" placeholder="Enter Stock ID..." required>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="teacat">Tea Category</label>
+      </div>
+
+      <div class="col-75">
+        <select id="teacat" name="teacat" required>
+          <option value="opa">OPA</option>
+          <option value="op">OP</option>
+          <option value="bop">BOP</option>
+          <option value="bopf">BOPF</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="totWeight">Total Weight</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="totWeight" name="totWeight" placeholder="Enter total weight..." required>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="packages">No of Packages</label>
+      </div>
+      <div class="col-75">
+        <input type="number" id="packages" name="packages" placeholder="Enter no of packages....." min="1" max="1000" required>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="datePrepared">Date Prepared</label>
+      </div>
+      <div class="col-75">
+          <input type="date" id="datePrepared" name="datePrepared" required>
+      </div>
+    </div>
+<br/>
+    <div class="row">
+
+      <input type="submit" value="Add auction stock details">
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    <h2 style = "color:green;">{{message}}</h2>
+    {% endfor %}
+    {% endif %}
+  </form>
+
+
+</div>
+
+
+
+
+{% endblock %}

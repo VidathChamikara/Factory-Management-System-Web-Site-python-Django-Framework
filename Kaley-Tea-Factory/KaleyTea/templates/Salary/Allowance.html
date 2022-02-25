@@ -1,0 +1,51 @@
+{% extends 'Salary/BaseMenu.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block contentHeader %}
+
+<html lang="en">
+{% include 'CommonUse/messages.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>Allowance</title>
+    <link rel="stylesheet" href="{% static 'css/Salary.css' %}">
+</head>
+<body>
+    <h1 style="color: #4caf50"> ALLOWANCE </h1><br><br><br>
+    <div class="table-wrapper">
+     <table class="fl-table">
+        <thead>
+         <tr>
+             <th>Allowance_ID</th>
+             <th>Allowance By Price</th>
+             <th>Incentive 1</th>
+             <th>Incentive 2</th>
+         </tr>
+        </thead>
+        {% for allowance in allowance%}
+        <tr>
+            <td>{{ allowance.id }}</td>
+            <td>{{ allowance.allowance_by_price }}</td>
+            <td>{{ allowance.incentive_1 }}</td>
+            <td>{{ allowance.incentive_2}}</td>
+            <td>
+                <a href="/Employee/Salary/edit_allowance{{ allowance.id }}" class="button button-search">Edit</a>
+                <a href="/Employee/Salary/delete_allowance{{ allowance.id }}" class="button button-delete" onclick="if (!confirm('Are you sure You Want to Delete?.Press Ok To Confirm.')) { return false }">Delete</a>
+{#                <form method="post" action="{% url 'delete_allowance' %} ">#}
+{#                    {% csrf_token %}#}
+{#                    <input type="hidden" name="salary_id" value="{{ allowance.id }}"/>#}
+{#                    <input type="submit" value="Delete" class="button button-delete" onclick="if (!confirm('Are you sure You Want to Delete?.Press Ok To Confirm.')) { return false }">#}
+{#                </form>#}
+            </td>
+        </tr>
+     {% endfor %}
+     </table>
+    </div>
+    <button class="button button-edit-div">
+        <a href="/Employee/Salary/AddAllowance/" class="link_button">Add New Allowance</a>
+    </button>
+</body>
+</html>
+
+{% endblock %}

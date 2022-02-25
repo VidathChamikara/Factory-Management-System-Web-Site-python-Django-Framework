@@ -1,0 +1,114 @@
+{% extends 'EmployeeManagement_templates/employeeBase.html' %}
+
+<!-------------title--------------->
+{% block title %}View Employee{% endblock title %}
+
+<!-------------styles--------------->
+{% block moreStyles %}
+.deleteButton{
+    background-color: red;
+    border: none;
+    color: white;
+    width: 100%;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+{% endblock moreStyles %}
+
+{% block displayMessage %}
+
+{% if messages %}
+    {% for message in messages %}
+        <script>alert("{{ message }}");</script>
+    {% endfor %}
+{% endif %}
+
+{% endblock displayMessage %}
+
+{% block pageContentHeader2 %}Employee Registration{% endblock pageContentHeader2 %}
+
+{% block content %}
+
+    <center>
+  <form method="POST" action="{% url 'update_employee' %}">
+
+    {% csrf_token %}
+
+      <input type="hidden" name="empId" value="{{ EmpId }}">
+
+    <center>
+  <table style="padding: 20px 20px 20px 20px; background-color:#95ED7D;">
+
+      <tr>
+          {{ form.designation.errors }}
+        <td><label for="name" >Name</label></td><br>
+
+      <td>{{form.name  }}</td><br>
+      </tr>
+      <tr>
+      <td><label for="epfNo" >EPF No</label></td><br>
+      <td>{{form.epfNo  }}</td><br>
+      </tr>
+      <tr>
+      <td><label for="nic">NIC No</label></td>
+      <td>{{ form.nic }}</td>
+      </tr>
+      <tr>
+      <td><label for="address">Address</label></td>
+      <td>{{ form.address }}</td>
+      </tr>
+      <tr>
+      <td><label for="gender">Gender</label></td>
+      <td>{{ form.gender }}</td>
+      </tr>
+      <tr>
+      <td><label for="maritalStatus">Marital Status</label></td>
+      <td>{{ form.maritalStatus }}</td>
+      </tr>
+      <tr>
+      <td><label for="phone">Contact No</label></td>
+      <td>{{ form.contactNo }}</td>
+      </tr>
+      <tr>
+      <td><label for="dob">Date of Birth</label></td>
+      <td>{{ form.dob }} YYYY-MM-DD</td>
+      </tr>
+      <tr>
+      <td><label for="doa">Date of Approval</label></td>
+      <td>{{ form.doa }} YYYY-MM-DD</td>
+      </tr>
+      <tr>
+      <td><label for="empgroup">Employee Group</label></td>
+      <td>{{ form.empGroup }}</td>
+      </tr>
+       <tr>
+      <td><label for="emptype">Employee Type</label></td>
+      <td>{{ form.empType }}</td>
+      </tr>
+       <tr>
+      <td><label for="designation">Designation</label></td>
+      <td>{{ form.designation }}</td>
+      </tr>
+      <tr>
+      <td><label for="basicsalary">Basic Salary</label></td>
+      <td>{{ form.basicSalary }}</td>
+      </tr>
+        <tr>
+            <td></td>
+            <td><input class="deleteButton" type="submit" value="Save Changes"></td>
+      </tr>
+    </table>
+        </center>
+    </form>
+        </center>
+{% endblock content %}
+
+

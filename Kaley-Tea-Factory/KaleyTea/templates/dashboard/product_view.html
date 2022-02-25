@@ -1,0 +1,76 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Product View Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+<!-----------------------------Create Product view Inventory Page-------------------------------------->
+<br>
+    <div class="col-md-12">
+         <div class="card card-body text-white bg-light col-md-4"  style="margin-left:820px">
+          <form action="GET">
+                 <input type="text" placeholder="Search Inventory Tray ID">
+<!--                 <a class="btn btn-danger" href="http://127.0.0.1:8000/searchbar/">Search</a>-->
+                <input type="submit" class="btn btn-outline-success text-info">
+<!--                    <div class="search_toggler"></div>-->
+          </form>
+        </div>
+        <br>
+
+        <div class="card card-body text-white">
+            <h2 class="text-danger text-left"><b>View Inventory Products Details</b></h2>
+            <hr class="text-danger">
+            <table class="table table-bordered table-striped text-dark" >
+                <thead class="bg-success">
+                      <tr  class="text-center">
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">In Date</th>
+                        <th scope="col">IN Time</th>
+                        <th scope="col">Tray ID</th>
+                        <th scope="col">Temparature</th>
+                        <th scope="col">Weight(Kg)</th>
+                        <th scope="col">Out Date</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                </thead>
+                {% for item in leaf %}
+                  <tr class="text-center">
+                      <th>{{ item.name }}</th>
+                      <th>{{ item.leaves_category }}</th>
+                      <th>{{ item.in_date }}</th>
+                      <th>{{ item.in_time }}</th>
+                      <th>{{ item.tray_id }}</th>
+                      <th>{{ item.temparature }}</th>
+                      <th>{{ item.tea_weight }}</th>
+                      <th>{{ item.out_date }}</th>
+                    <td>
+                        <form method="post" action="{% url 'NavigateToUpdateInv' %}">
+                        {% csrf_token %}
+                                    <input type="hidden" name="lid" value="{{ item.id }}"/>
+                                    <input type="submit" value="Update" class="btn btn-success btn-sm ml-2">
+                        </form>
+
+                        <form method="post" action="{% url 'NavigateToInvReport' %}">
+                        {% csrf_token %}
+                                    <input type="hidden" name="leafID" value="{{ item.id }}"/>
+                                    <input type="submit" value="report" class="btn btn-info btn-sm ml-2">
+                        </form>
+
+                        <form method="post" action="{% url 'dashboardProductDelete' %}">
+                        {% csrf_token %}
+                                    <input type="hidden" name="leafid" value="{{ item.id }}"/>
+                                    <input type="submit" value="Delete" class="btn btn-danger btn-sm ml-2" onclick="if(!confirm('Are You Sure, You want To Delete Inventory Items? click OK to Delete')){return false }">
+                        </form>
+                     </td>
+                  </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+<br><br>
+{% endblock %}

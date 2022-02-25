@@ -1,0 +1,52 @@
+{% extends 'Outlet_Stock/shopInventoryBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Tea Shop Inventory Management{% endblock title %}
+
+<!-------------------------Head------------------------->
+    {% block headImport %}
+
+    {% endblock headImport %}
+
+{% block pageContentHeader1 %}Sales Inventory Management{% endblock pageContentHeader1 %}
+
+{% block pageContentHeader2 %}Reports{% endblock pageContentHeader2 %}
+
+{% block reportbtn %}ClassActive{% endblock reportbtn %}
+
+{% block content %}
+
+
+ <!-- button -->
+    <div style="background-color:#add8e6;">
+        <br>
+        <h2>Monthly Report</h2>
+
+        <form action = "{% url 'GenerateStockMothlyReport' %}" method="get">
+
+                <input type="number"  name="month" placeholder="Input Month" required>
+                <input type="number"  name="year" placeholder="Input Year" required>
+                <input type="submit" class="btn1" value="Monthly Report">
+
+        </form>
+        <br><br>
+    </div>
+
+    <br>
+
+
+    <div style="background-color:#add8e6;">
+        <br>
+        <h2>Annual Report</h2>
+        <form action = "{% url 'GenerateStockAnnualReport' %}" method="get">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="number"  name="year" placeholder="Input Year" required>
+                <input type="submit" class="btn1" value="Annual Report">
+
+        </form>
+        <br><br>
+    </div>
+    <!-- End page content -->
+    </div>
+
+{% endblock content %}

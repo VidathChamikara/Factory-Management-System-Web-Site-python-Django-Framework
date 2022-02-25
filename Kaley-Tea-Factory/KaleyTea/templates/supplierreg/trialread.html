@@ -1,0 +1,31 @@
+{% extends 'supplierreg/suppliermain.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block contentHeader %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+    <th>ID</th>
+    <th>Catelog ID</th>
+    <th>Net Weight</th>
+    <th>Edit</th>
+    </tr>
+    {% for register in Reg_list %}
+    <tr>
+     <td>{{ register.id }}</td>
+     <td>{{ register.Username }}</td>
+     <td>{{ register.Emaill }}</td>
+     <td><a href="/Edit/trialEdit/{{ register.id}}">Update</a> <a href="/Trial/Delete/trialDelete/{{ register.id}}">Delete</a></td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
+{% endblock %}

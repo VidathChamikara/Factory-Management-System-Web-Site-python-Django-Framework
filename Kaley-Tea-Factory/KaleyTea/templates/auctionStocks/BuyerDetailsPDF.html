@@ -1,0 +1,61 @@
+
+
+<html>
+
+<style>
+tr {
+  text-align: center;
+}
+table, th, td {
+  border: 2px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+  font-size: 14px;
+}
+h1 {
+  text-align: center;
+  font-size: 30px;
+}
+
+</style>
+
+
+
+
+
+<body>
+
+<h1>Buyer Details</h1>
+<hr/>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Company Name</th>
+    <th>Register ID</th>
+    <th>Address</th>
+    <th>Phone Number</th>
+  </tr>
+    {% for buyerD in buyerDetails %}
+  <tr>
+    <td>{{ buyerD.id }}</td>
+    <td>{{ buyerD.Cname }}</td>
+    <td>{{ buyerD.regNo }}</td>
+    <td>{{ buyerD.Address }}</td>
+    <td>{{ buyerD.PNumber }}</td>
+  </tr>
+
+    {% endfor %}
+
+
+</table>
+
+<hr/>
+
+
+
+
+
+
+</body>
+</html>
+

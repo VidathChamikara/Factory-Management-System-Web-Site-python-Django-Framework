@@ -1,0 +1,239 @@
+{% extends 'auctionStocks/auctionStocksMain.html' %}
+{% load widget_tweaks %}
+{% block contentHeader %}
+<html>
+<header><h2> Final Production Management</h2></header>
+<p3> Auction Stock | Update Buyer</p3>
+
+<hr/>
+<ul>
+  <li><a href="/cat/cat/">Prepare A Catelog</a></li>
+  <li><a href="/allcat/all/">Auction Details</a></li>
+  <li><a href="/BuyerRead/BuyerRead/">Buyer Details</a></li>
+</ul>
+
+<style>
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+
+
+
+#stock {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+p3 {
+  font-size: 35px;
+  color:red;
+}
+p1 {
+font-size: 30px;
+}
+p {
+font-size: 25px;
+}
+
+
+.button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 3px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+label {
+  font-size: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+input[type=number], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+
+label {
+  padding: 1px 12px 12px 0;
+  display: inline-block;
+
+}
+
+
+
+input[type=submit] {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 50px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: center;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+
+</style>
+
+<body>
+
+
+
+
+
+<hr/>
+    <p> Update Buyer Form</p>
+<hr/>
+<div class="container">
+  <form method = "POST" action="/updateBuyer/updateBuyer/{{buyers.id}}">
+      {% csrf_token %}
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="id">Buyer ID</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="id" name="id" placeholder="Enter Buyer ID..." value="{{buyers.id}}" readonly>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="Cname">Company Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="Cname" name="Cname" placeholder="Enter Buyer Company Name..." value="{{buyers.Cname}}" required>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="regNo">Register No</label>
+      </div>
+      <div class="col-75">
+        <input type="number" id="regNo" name="regNo" placeholder="Enter register no... (Format should be xxxx)" min="1000" max="9999" value="{{buyers.regNo}}" required>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="Address">Address</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="Address" name="Address" placeholder="Enter Address..." value="{{buyers.Address}}" required>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="PNumber">Phone No</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="PNumber" name="PNumber" placeholder="Enter Phone Number... (Format should be xxx-xxx-xxxx)" value="{{buyers.PNumber}}" required>
+      </div>
+    </div>
+
+
+<br/>
+    <input type="submit" value="Insert record">
+    {% if messages %}
+    {% for message in messages %}
+    <h2 style = "color:green;">{{message}}</h2>
+    {% endfor %}
+    {% endif %}
+  </form>
+</div>
+
+<br/>
+</body>
+</html>
+
+{% endblock %}

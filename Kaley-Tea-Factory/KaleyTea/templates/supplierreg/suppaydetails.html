@@ -1,0 +1,123 @@
+{% extends 'supplierreg/suppliermain.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block contentHeader %}
+<html>
+<head>
+<style>
+table {
+  border: 4px solid #4caf50;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 2px solid #dddddd;
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(1) {
+  background-color: #4caf50;
+}
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  background-color: green;
+  opacity: 1;
+}
+.Dbutton{
+background-color: #FF0000;
+boarder: none;
+color: white;
+padding: 5px 10px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 4px;
+cursor: pointer;
+boarder-radius: 25px;
+}
+.Dbutton:hover {
+  background-color: green;
+  opacity: 1;
+}
+h1 {
+  color: red;
+}
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  opacity: 0.9;
+}
+.btn:hover {
+  background-color: green;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<center>
+{% if messages %}
+      {% for message in messages %}
+      <h2 style="color: red;">{{message}}</h2>
+      {% endfor %}
+      {% endif %}
+</center>
+<hr>
+<h1>Payment Details</h1>
+<hr>
+<a href="http://127.0.0.1:8000/Supplier/Payment/supplierPayment/"><button type="submit" class="registerbtn" >+  Add New Payment</button></a>
+
+<br><br><br><br>
+
+
+<table>
+  <tr>
+  <th>Payment ID</th>
+  <th>Supplier NIC</th>
+  <th>Weight</th>
+  <th>Payment</th>
+  <th>Date</th>
+  <th>Time</th>
+  <th>Action</th>
+  </tr>
+
+  {% for payment in Pay_list %}
+  <tr>
+
+   <td>{{ payment.id }}</td>
+   <td>{{ payment.Suppliernic }}</td>
+   <td>{{ payment.Totalkilo }}</td>
+   <td>{{ payment.Totalpayment }}</td>
+   <td>{{ payment.Date }}</td>
+   <td>{{ payment.Time }}</td>
+   <td><a href="http://127.0.0.1:8000/Payment/Delete/paymentDelete/{{ payment.id }}" class="Dbutton">Delete</a></td>
+
+  </tr>
+{% endfor %}
+
+
+</table>
+<br>
+<a href="http://127.0.0.1:8000/suppayDetailsPDF/suppayDetailsPDF/"><button class="btn">Print Payment Slip</button></a>
+</body>
+</html>
+
+
+{% endblock %}

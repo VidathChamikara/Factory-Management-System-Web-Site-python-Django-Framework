@@ -1,0 +1,61 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Add Product Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<center>
+<div class="row my-3" >
+    <div class="col-md-10">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+<br>
+<!-----------------------------Create Add Inventory Page-------------------------------------->
+
+        <div class="card card-body bg-light" style="margin-left:200px" >
+            <h2 class="text-success">Add Inventory Products</h2>
+            <hr>
+            <table>
+                  <tr>
+                    <th>Daily prod. ID</th>
+                    <th>Sub id</th>
+                    <th>Date</th>
+                    <th>Tea grade</th>
+                    <th>Weight</th>
+                    <th>Action</th>
+                  </tr>
+
+                    {% for pr in products %}
+                        <tr>
+                            <td>{{ pr.id }}</td>
+                            <td>{{ pr.subID }}</td>
+                            <td>{{ date }}</td>
+                            <td>{{ pr.teaGrade }}</td>
+                            <td>{{ pr.gradeWeight }}</td>
+                            <td>
+
+                                <form method="post"  action="{% url 'deleteSubProdAll' %}" >
+                                    {% csrf_token %}
+                                        <input type="hidden" name="id" value="{{ pr.id }}">
+                                        <input type="submit" value="Delete" class="btn btn-success btn-block">
+                                 </form>
+                             </td>
+
+                        </tr>
+                    {% endfor %}
+            </table>
+
+        </div>
+    </div>
+</div>
+</center>
+{% endblock %}

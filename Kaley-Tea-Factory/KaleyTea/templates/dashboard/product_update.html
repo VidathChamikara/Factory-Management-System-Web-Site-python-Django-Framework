@@ -1,0 +1,71 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Update Page {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-----------------------------Create Update Inventory Page-------------------------------------->
+
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="border bg-light p-3">
+                <h2  class="text-center">Update Inventory Items</h2>
+                <hr>
+
+                <form method="POST" action="{% url 'updateLeaf' %}"  class="text-center text-dark">
+                    {% csrf_token %}
+
+                    <input type="hidden" name = "LID" value="{{ lid }}">
+                    <br>
+                     <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">Name:</label>
+                    {{ form.name }}
+                </div>
+                 <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">Category:</label>
+                     {{ form.leaves_category }}
+
+                </div>
+                 <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">In Date:</label>
+                     {{ form.in_date }}
+
+                </div>
+                <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">In Time:</label>
+                    {{ form.in_time }}
+
+                </div>
+                <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">Tray ID:</label>
+                    {{ form.tray_id }}
+
+                </div>
+                <div class="mb-3 row" >
+                     <label class="col-sm-2 col-form-label" >Temparature:</label>
+                    {{ form.temparature }}
+
+                </div>
+
+                 <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">Weight(Kg):</label>
+                     {{ form.tea_weight }}
+
+                </div>
+                 <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">OutDate:</label>
+                     {{ form.out_date }}
+
+
+                </div>
+                <br>
+                    <a class="btn btn-secondary" href="{% url 'dashboard-product' %}">Cancel</a>
+                    <input class="btn btn-success" type="submit" value="Update">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

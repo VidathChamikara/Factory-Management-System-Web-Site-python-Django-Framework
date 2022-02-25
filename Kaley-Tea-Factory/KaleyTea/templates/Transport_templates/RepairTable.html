@@ -1,0 +1,196 @@
+{% extends 'Transport_templates/transportationBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Transportation Management{% endblock title %}
+
+<!-------------------------Styles------------------------->
+    {% block moreStyles %}
+
+
+table
+    {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+
+    }
+
+    th
+    {
+      border: 1px solid #dddddd;
+      text-align: center;
+      font-size: 15px;
+      padding: 8px;
+      background: #f5e57f;
+    }
+
+    td
+    {
+      border: 1px solid #dddddd;
+      text-align: left;
+      font-size: 20px;
+      padding: 8px;
+    }
+
+    tr:nth-child(even)
+    {
+      background-color: #c5f1b8;
+    }
+
+
+.regButton {
+    background-color: green; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+    .regButton:hover {
+  background-color: #000000;
+  color: #77fd01;
+}
+    .regButton2 {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+    .regButton2:hover {
+  background-color: #000000;
+  color: #fd4201;
+}
+.ClassActive {
+    background-color: #8db8e0;
+}
+
+.ClassActive1 {
+    background-color: #2292CF;
+    color: white;
+}
+ .container2
+{
+    min-width: 500px;
+    width: 90%;
+}
+
+.container2
+{
+    margin-left:20px;
+    padding: 10px;
+}
+
+.container2 th
+{
+    background-color:#a9afe7 ;
+}
+
+ h2 {
+      color: #082c88;
+    }
+
+
+
+    {% endblock moreStyles %}
+
+<!-------------------------Body Menue------------------------->
+{% block repairsBtn %}ClassActive{% endblock repairsBtn %}
+
+<!-----------------------------------Header1-------------------------------------->
+{% block pageContentHeader1 %}Transportation Management{% endblock pageContentHeader1 %}
+
+<!----------------------------------Header2--------------------------------------->
+{% block pageContentHeader2 %}Repair Table{% endblock pageContentHeader2 %}
+
+<!----------------------------------Hide Menues--------------------------------------->
+{% block vehicleRecordsMenu %}{% endblock vehicleRecordsMenu %}
+
+<!-------------------------Body Sub Menue------------------------->
+{% block repairTableBtn %}ClassActive1{% endblock repairTableBtn %}
+
+
+<!----------------------------------Body Content--------------------------------------->
+{% block content %}
+
+<!---------------------------------Messages-------------------------------------->
+    {% if messages %}
+    {% for message in messages %}
+      <script>alert("{{ message }}");</script>
+    {% endfor %}
+{% endif %}
+
+
+<br><br>
+
+<!---Repair Table--->
+   <div class="container2">
+   <h2><b>Vehicle Repair Details</b></h2><br>
+       <table>
+              <tr >
+                <th>ID</th>
+                <th >Bill No </th>
+                <th> Vehicle No</th>
+                <th>Description</th>
+                <th>Service Date</th>
+                <th>Amount</th>
+                <th>Update</th>
+                <th>Delete</th>
+
+              </tr>
+
+            {% for repair in repairs %}
+        <tr>
+        <td>{{ repair.id}} </td>
+        <td>{{ repair.Bill_No}}</td>
+        <td>{{ repair.VehicleNo}}</td>
+        <td>{{ repair.Description}}</td>
+        <td>{{ repair.Service_Date}}</td>
+        <td>{{ repair.Amount}}</td>
+
+
+               <form method="post" action="{% url 'show_repair_records' %} ">
+                    {% csrf_token %}
+             <input type = "hidden" name="ReId" value="{{ repair.id }}"/>
+            <td><input type="submit" class = "regButton2" value="Update"> </td>
+
+         </form>
+
+
+
+            <form method="post" action="{% url 'delete_repair_records' %} ">
+                    {% csrf_token %}
+             <input type = "hidden" name="id" value="{{ repair.id }}"/>
+            <td><input type="submit" class = "regButton" value="Delete" onclick="if (!confirm('Are you sure You Want to Delete?.Press Ok To Confirm.')) { return false}"></td>
+
+         </form>
+
+
+
+        </tr>
+        {% endfor %}
+
+    </table>
+
+   <br><br>
+
+
+
+   </div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+

@@ -1,0 +1,79 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Add Product Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<center>
+<div class="row my-3" >
+    <div class="col-md-10">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+<br>
+<!-----------------------------Create Add Inventory Page-------------------------------------->
+
+        <div class="card card-body bg-light" style="margin-left:200px" >
+            <h2 class="text-success">Add Inventory Products</h2>
+            <hr>
+            <form method = "POST">
+                {% csrf_token %}
+
+                <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">Name :</label>
+                    {{ form.name }}
+                </div>
+                 <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">Category :</label>
+                     {{ form.leaves_category }}
+
+                </div>
+                 <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">In Date :</label>
+                     {{ form.in_date }}
+
+                </div>
+                <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">In Time :</label>
+                    {{ form.in_time }}
+
+                </div>
+                <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">Tray ID :</label>
+                    {{ form.tray_id }}
+
+                </div>
+                <div class="mb-3 row" >
+                     <label class="col-sm-2 col-form-label" >Temp :</label>
+                    {{ form.temparature }}
+
+                </div>
+
+                 <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">Weight(Kg):</label>
+                     {{ form.tea_weight }}
+
+                </div>
+                 <div class="mb-3 row">
+                     <label class="col-sm-2 col-form-label">Out Date :</label>
+                     {{ form.out_date }}
+
+
+                </div>
+                <br>
+                <center><input class="btn btn-success btn-block" type="submit" value="Add Inventory"></center>
+            </form>
+
+        </div>
+    </div>
+</div>
+</center>
+{% endblock %}

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <style type="text/css">
+        body {
+            font-weight: 200;
+            font-size: 14px;
+        }
+        .header {
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+            color: #007cae;
+        }
+        .title {
+            font-size: 22px;
+            font-weight: 100;
+            /* text-align: right;*/
+            padding: 10px 20px 0px 20px;
+        }
+        .title span {
+            color: #007cae;
+        }
+        .details {
+            padding: 10px 20px 0px 20px;
+            text-align: left !important;
+            /*margin-left: 40%;*/
+        }
+        .hrItem {
+            border: none;
+            height: 1px;
+            /* Set the hr color */
+            color: #333; /* old IE */
+            background-color: #fff; /* Modern Browsers */
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<hr>
+<h1 style="text-align: center">Kaley Tea Shop - Inventory Annual Report</h1>
+<hr>
+
+<!-- table -->
+
+<table>
+    <tr>
+
+        <th>Date</th>
+        <th>Category</th>
+        <th>Weight</th>
+        <th>Number of Packets</th>
+
+    </tr>
+
+    {% for packet in Packets %}
+
+        {% for pro in prod %}
+
+            {% if packet.categoryProductID.id == pro.id %}
+
+                <tr>
+                    <td>{{ packet.date  }}</td>
+                    <td>{{ pro.category }}</td>
+                    <td>{{ pro.weight }}</td>
+                    <td>{{ packet.noOfPackets }}</td>
+                </tr>
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endfor %}
+
+    <tr>
+        <td>	</td>
+        <td>    </td>
+        <td>	</td>
+        <td> 	</td>
+    </tr>
+</table>
+
+
+</body>
+</html>

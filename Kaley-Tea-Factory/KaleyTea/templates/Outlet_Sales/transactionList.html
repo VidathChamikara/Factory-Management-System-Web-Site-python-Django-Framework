@@ -1,0 +1,55 @@
+{% extends "Outlet_Sales/outleSalesMain.html" %}
+{% load widget_tweaks %}
+
+{% block transactionsActive %}classActivePage{% endblock %}
+{% block contentHeader %}
+{% include 'CommonUse/messages.html' %}
+<br>
+<h3 style="color: #4caf50">Outlet Sales - Transactions</h3>
+<!------------------------------------ START SEARCH BAR ----------------------------------->
+<div class="search-container">
+    <form method="post" action="/Shop/Outlet/transactions/">
+        {% csrf_token %}
+        <input name="search" type="text" placeholder="Bill Number...">
+        <input name="dateSearch" type="date" class="search-container">
+        <button type="submit" class="button button-edit" style="font-size:18px">Search</button>
+        <a href="/Shop/Outlet/transactions/"><button type="button" class="button button-delete" style="font-size:18px">
+            Reset</button> </a>
+    </form>
+</div>
+<!------------------------------------ END SEARCH BAR ----------------------------------->
+
+<!----------------------------------- START TRANSACTIONS TABLE ------------------------------>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead><tr>
+            <th>Bill Number</th>
+            <th>Total (Rs.)</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>More</th>
+        </tr></thead>
+        <tbody>
+        {% for  bill in Bills %}
+            <tr>
+                <td>{{ bill.id }}</td>
+                <td>{{ bill.Total_amount }}</td>
+                <td>{{ bill.Date }}</td>
+                <td>{{ bill.Time }}</td>
+
+                <td>
+                    <form method="post" action="/Shop/Outlet/billDetails/id={{ bill.id }}">
+                        {% csrf_token %}
+                        <input type="hidden" name="bill_id" value="{{ bill.id }}">
+                        <input type="submit" value="View" class="button button-edit">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table></div><br/>
+<!----------------------------------- END TRANSACTIONS TABLE ------------------------------>
+
+{% endblock %}
+

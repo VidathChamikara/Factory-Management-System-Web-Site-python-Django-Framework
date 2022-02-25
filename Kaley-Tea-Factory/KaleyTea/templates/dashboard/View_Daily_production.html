@@ -1,0 +1,56 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Add Product Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<center>
+<div class="row my-3" >
+    <div class="col-md-10">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+<br>
+<!-----------------------------Create Add Inventory Page-------------------------------------->
+
+        <div class="card card-body bg-light" style="margin-left:200px" >
+            <h2 class="text-success">Add Inventory Products</h2>
+            <hr>
+             <table>
+                  <tr>
+                    <th>Daily prod. ID</th>
+                    <th>Sub id</th>
+                    <th>Date</th>
+                    <th>Total Weight</th>
+                    <th>Action</th>
+                  </tr>
+                    {% for prod in prod %}
+                    <tr>
+                        <td>{{ prod.id }}</td>
+                        <td>{{ prod.subID }}</td>
+                        <td>{{ prod.date }}</td>
+                        <td>{{ prod.totalWeight}}</td>
+                        <td>
+                            <form method="post"  action="{% url 'NavigateToViewProd' %}" >
+                                {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ prod.subID }}">
+                            <input type="submit" value="View" class="btn btn-success btn-block">
+
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+             </table>
+        </div>
+    </div>
+</div>
+</center>
+{% endblock %}

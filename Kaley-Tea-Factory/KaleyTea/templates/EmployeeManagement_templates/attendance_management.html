@@ -1,0 +1,245 @@
+{% extends 'EmployeeManagement_templates/employeeBase.html' %}
+<!-------------title--------------->
+{% block title %}Attendance_Management{% endblock title %}
+
+<!-------------styles--------------->
+{% block moreStyles %}
+    .addButton{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.deleteButton{
+    background-color: red; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.event__search__floater {
+  position: fixed;
+  top: 50px;
+/*   left:0; */
+  right: 50px;
+  transition: all ease-in-out 0.2s;
+  transform: translate(-50%, -50%);
+}
+
+.search__anchor{
+  position: relative;
+  width:auto;
+  height: auto;
+/*   TODO: Center anchor */
+}
+.search__submit {
+ opacity:0;
+  width: 0px;
+}
+.search__bar {
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  outline:none;
+  border:none;
+  background: #fff;
+  width: 50px;
+  height:50px;
+  border-radius: 25px;
+  opacity: 0;
+  z-index:5;
+  transition: all 0.2;
+  font-size: 1em;
+}
+.search__bar:hover{
+  cursor: pointer;
+}
+.search__bar:focus {
+  width: 250px;
+  left:auto;
+  opacity: 1;
+  cursor: text;
+  transition: all 0.2;
+  padding-left: 25px;
+  padding-right: 70px;
+}
+.search__toggler {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: green;
+  opacity: 1;
+  top: -4px;
+  left: -4px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+.search__toggler:hover{
+  cursor: pointer;
+}
+.search__toggler::before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: 22px;
+  right:0;
+  bottom:0;
+  left: 22px;
+  width: 12px;
+  height: 2px;
+  background: #fff;
+  transform: rotate(45deg);
+  transition: all 0.2s;
+}
+.search__toggler::after {
+  content: "";
+  position: absolute;
+  margin: auto;
+  top:-5px;
+  right:0;
+  bottom:0;
+  left: -5px;
+  width:25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  transition: all 0.2s;
+}
+.search__bar:focus ~ .search__toggler {
+  right: 400px;
+  background: #151515;
+  z-index: 6;
+  transition: all 0.2;
+}
+.search__bar:focus ~ .search__toggler::before{
+  top: 0;
+  left: 0;
+  width: 25px;
+}
+.search__bar:focus ~ .search__toggler::after {
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 2px;
+  border: none;
+  background: white;
+  border-radius: 0%;
+  transform: rotate(-45deg);
+}
+
+{% endblock moreStyles %}
+
+{% block pageContentHeader2 %}Attendance Management{% endblock pageContentHeader2 %}
+
+{% block attendanceBtn %}ClassActive{% endblock attendanceBtn %}
+
+{% block content %}
+
+{#    <div>#}
+{#        <div class="event__search__floater">#}
+{#        <div class="search__anchor">#}
+{#          <form id="event-search-form" action="get">#}
+{#                <input type="text" class="search__bar" placeholder="Search Employee">#}
+{#            <input class="search__submit" type="submit">#}
+{#            <div class="search__toggler"></div>#}
+{#          </form>#}
+{#          </div>#}
+{#        </div>#}
+
+         <h1>{{ date }}</h1>
+
+           <form action="{% url 'printDailyReport' %}">
+
+               <input type="hidden" name="date" value="{{ date }}">
+
+               <input type="submit" value="Generate Report" class="deleteButton" >
+           </form>
+
+
+            <table class = "table table-striped table-bordered table-sm">
+                <tr>
+                    <th>EPF No</th>
+                    <th>NIC</th>
+                    <th>Name</th>
+                    <th>Marked Day Type</th>
+                    <th>Marked Attendance</th>
+                    <th>Day Type</th>
+                    <th>Edit</th>
+
+                </tr>
+
+               {% for att in attendance %}
+                   <tr>
+
+                       <td>{{ att.empID.epfNo }}</td>
+                       <td>{{ att.empID.nic }}</td>
+                       <td>{{ att.empID.name }}</td>
+                       <td>{{ att.daytype }}</td>
+                       <td>{{ att.attendaceStatus }}</td>
+
+
+                       <form method="post" action="{% url 'updatemark_attendance' %}">
+                           {% csrf_token %}
+                           <input type="hidden" name="workersid" value="{{ att.empID.id }}">
+                           <input type="hidden" name="date" value="{{ date }}">
+
+                           <td>
+                               <select name="dayType" required>
+                                   <option value="fullDay">Full Day</option>
+                                   <option value="halfDay">Half Day</option>
+                               </select>
+                           </td>
+
+                           <td>
+                               <input type="submit" value="Present" class="addButton">
+                           </td>
+
+
+                       </form>
+
+
+                       <td>
+                           <form method="post" action="{% url 'updatemark_attendance' %}">
+                               {% csrf_token %}
+                               <input type="hidden" name="workersid" value="{{ att.empID.id }}">
+                               <input type="hidden" name="date" value="{{ date }}">
+
+                               <input type="submit" value="Absent" class="deleteButton" >
+                           </form>
+
+                       </td>
+
+                   </tr>
+                {% endfor %}
+
+            </table>
+    </div>
+
+{% endblock content %}

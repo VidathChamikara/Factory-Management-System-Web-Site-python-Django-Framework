@@ -1,0 +1,115 @@
+{% extends "Outlet_Sales/outleSalesMain.html" %}
+{% load widget_tweaks %}
+
+{% block salesReportsActive %}classActivePage{% endblock %}
+{% block contentHeader %}
+{% include 'CommonUse/messages.html' %}
+<br>
+<h3 style="color: #4caf50">Outlet Sales - Reports</h3>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+    function generatePDF() {
+        const element = document.getElementById("salesChart");
+
+        html2pdf()
+        .from(element)
+        .save();
+    }
+</script>
+
+<!--------------------------------- START SALES CHART ------------------------------------>
+<div id="salesChart" style="width:100%; height:300px;"></div>
+<script>
+    google.charts.load('current', {
+      packages: ['corechart', 'line']
+    });
+    google.charts.setOnLoadCallback(drawLineColors);
+
+    function drawLineColors() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Day');
+      data.addColumn('number', 'Last month');
+      data.addColumn('number', 'This month');
+
+      data.addRows({{ LineData|safe }});
+
+      var options = {
+        title: 'SALES OF THIS MONTH & LAST MONTH',
+        hAxis: {
+          title: 'Day',
+        },
+        vAxis: {
+          title: 'Sales (Rs.)'
+        },
+        colors: ['#D11A2A', '#4caf50']
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('salesChart'));
+      chart.draw(data, options);
+    }
+</script>
+<br>
+<!--------------------------------- END SALES CHART ------------------------------------>
+
+<!------------------------------ START REQUEST REPORTS --------------------------------->
+<div class="reports">
+    <div class="header">Quick Reports</div>
+    <div class="form-inline content">
+        <a class="button" href="{% url 'report-yesterday' %}">Yesterday</a>
+        <a class="button" href="{% url 'report-last7' %}">Last 7 days</a>
+        <a class="button" href="{% url 'report-lastMonth' %}">Last Month</a>
+        <a class="button" href="{% url 'report-lastYear' %}">Last Year</a>
+    </div>
+</div>
+<div class="reports">
+    <div class="header">Specific Month</div>
+    <div class="form-inline content">
+        <form method="post" action="{% url 'report-specificMonth' %}">
+            {% csrf_token %}
+            <label>Generate Report of</label>
+            <input name="month" type="month" min="2021-01" max="2050-12" required>
+            <input type="submit" class="button" value="Generate Report">
+        </form>
+    </div>
+</div>
+<div class="reports">
+    <div class="header">Annual Reports</div>
+    <div class="form-inline content">
+        <form method="post" action="{% url 'report-specificYear' %}">
+            {% csrf_token %}
+            <label>Generate Annual Sales Report of </label>
+            <input name="year" type="number" min="2021" max="2050" required>
+            <input type="submit" class="button" value="Generate Report">
+        </form>
+    </div>
+</div>
+
+<!------------------------------ END REQUEST REPORTS --------------------------------->
+
+<!--------------------------------- START PIE CHART ------------------------------------>
+<div id="thisMonthPie"></div>
+
+<script>
+<!--    google.charts.load("current", {packages:["corechart"]});-->
+<!--    google.charts.setOnLoadCallback(drawChart);-->
+<!--    function drawChart() {-->
+<!--        var data = new google.visualization.DataTable();-->
+<!--        data.addColumn('string', 'Product');-->
+<!--        data.addColumn('number', 'Quantity Sold');-->
+<!--        data.addRows({{ ThisMonthPie|safe }});-->
+
+<!--        var options = {-->
+<!--          title: 'SALES IN THIS MONTH BY QTY',-->
+<!--          width: 500,-->
+<!--          height: 300,-->
+<!--          is3D: true,-->
+<!--        };-->
+
+<!--        var chart = new google.visualization.PieChart(document.getElementById('thisMonthPie'));-->
+<!--        chart.draw(data, options);-->
+<!--    }-->
+</script>
+<!--------------------------------- END PIE CHART ------------------------------------>
+
+{% endblock %}

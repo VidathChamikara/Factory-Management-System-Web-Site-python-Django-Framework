@@ -1,0 +1,26 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Dashboard Page {% endblock %}
+
+{% block content %}
+
+<!-----------------------------Create Inventory Dashboard Page-------------------------------------->
+<div class="row ">
+    <div class="col-md-6 my-2">
+        <div class="bg-white">
+            <div class="card-body">
+                {% include 'inventorySystem/top.html' %}
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 my-2">
+        <div class="bg-white">
+            <div class="card-body">
+                {% include 'inventorySystem/top_day.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

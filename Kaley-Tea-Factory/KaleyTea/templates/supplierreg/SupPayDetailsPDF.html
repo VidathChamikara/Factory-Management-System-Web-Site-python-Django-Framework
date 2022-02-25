@@ -1,0 +1,47 @@
+
+<html>
+
+<style>
+tr {
+ text-align: center;
+}
+table, th, td {
+ border: 2px solid black;
+ border-collapse: collapse;
+ padding: 10px;
+ font-size: 14px;
+}
+h1 {
+ text-align: center;
+ font-size: 30px;
+}
+</style>
+<body>
+<h1>Payment Details</h1>
+<hr/>
+<table>
+  <tr>
+  <th>Payment ID</th>
+  <th>Supplier NIC</th>
+  <th>Weight</th>
+  <th>Payment</th>
+  <th>Date</th>
+  <th>Time</th>
+
+  </tr>
+
+  {% for payment in Pay_list %}
+  <tr>
+
+   <td>{{ payment.id }}</td>
+   <td>{{ payment.Suppliernic }}</td>
+   <td>{{ payment.Totalkilo }}</td>
+   <td>{{ payment.Totalpayment }}</td>
+   <td>{{ payment.Date }}</td>
+   <td>{{ payment.Time }}</td>
+
+  </tr>
+{% endfor %}
+</table>
+</body>
+</html>

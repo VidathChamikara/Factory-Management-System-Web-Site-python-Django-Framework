@@ -1,0 +1,74 @@
+{% extends 'Outlet_Stock/shopInventoryBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Tea Shop Inventory Management{% endblock title %}
+
+<!-------------------------Head------------------------->
+    {% block headImport %}
+
+    {% endblock headImport %}
+
+{% block pageContentHeader1 %}Sales Inventory Management{% endblock pageContentHeader1 %}
+
+{% block pageContentHeader2 %}View Tea Packets{% endblock pageContentHeader2 %}
+
+
+{% block viewteabtn %}ClassActive{% endblock viewteabtn %}
+
+
+{% block content %}
+
+<!-- table -->
+    <div>
+        <table class="center">
+            <tr>
+
+                <th>Date</th>
+                <th>Category</th>
+                <th>Weight</th>
+                <th>Number of Packets</th>
+                <th>Edit</th>
+                <th>Delete</th>
+
+            </tr>
+
+            {% for packet in Packets %}
+
+                {% for pro in prod %}
+
+                    {% if packet.categoryProductID.id == pro.id %}
+
+                        <tr>
+                            <td>{{ packet.date  }}</td>
+                            <td>{{ pro.category }}</td>
+                            <td>{{ pro.weight }}</td>
+                            <td>{{ packet.noOfPackets }}</td>
+
+                            <td> <form method="post" action = "{% url 'editpackets' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="pid" class="btn1" value="{{ packet.id }}">
+                                <input type="submit" class="btn1" value="   EDIT   ">
+                            </form>
+                            </td>
+                            <td>
+                                <form method="post" action = "{% url 'deletepackets' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="deleteid" class="btn2" value="{{ packet.id }}">
+                                    <input type="submit" value="DELETE"  class="btn2" onclick="if (!confirm('Are you sure You Want to Delete?.Press Ok To Confirm.')) { return false }">
+                                </form>
+                            </td>
+                        </tr>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% endfor %}
+
+        </table>
+    </div>
+
+    <!-- End page content -->
+
+
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% load widget_tweaks %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<link rel="shortcut icon" type="image/png" href="{% static 'images/logo.png' %}">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Admin Home</title>
+<link rel="stylesheet" href="{% static '/css/inventorycss/bootstrap.css' %}">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+</head>
+<body>
+
+<div class="row">
+    <div class="col-md-12 mt-4">
+        <div class="card">
+            <div class="card-header bg-success text-white text-center">
+                Kaley Tea Admin Panel
+            </div>
+
+            <div class="row ">
+                <div class="col-md-4 my-2">
+                    <div class="bg-white">
+                        <div class="card-body">
+                            {% include 'Home/teaFactory.html' %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 my-2">
+                    <div class="bg-white">
+                        <div class="card-body">
+                            {% include 'Home/teaShop.html' %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 my-2">
+                    <div class="bg-white">
+                        <div class="card-body">
+                            {% include 'Home/factorySystem.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

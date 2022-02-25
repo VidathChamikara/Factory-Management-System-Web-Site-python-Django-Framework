@@ -1,0 +1,35 @@
+{% extends "InventorySystem/sideprofile.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Profile Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br><br>
+<div class="row my-4 mt-2">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                Update Inventory User Details
+            </div>
+            <div class="row p-3">
+                <div class="col-md-12 bg-light">
+                    <span class="h4">Update Profile Information</span class="h4">
+                    <hr>
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        {{ user_form|crispy }}
+                        {{ profile_form|crispy }}
+                        <br>
+                        <center> <input class="btn btn-success" type="submit" value="Update"></center>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+{% endblock %}

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+        <title>Maintenance Reports</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+
+            .title span {
+                color: #007cae;
+            }
+   table
+    {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th
+    {
+      border: 1px solid #dddddd;
+      text-align: center;
+      font-size: 15px;
+      padding: 8px;
+      background: #d9a9e7;
+    }
+
+    td
+    {
+      border: 1px solid #e7e5e5;
+      text-align: left;
+      font-size: 12px;
+      padding: 8px;
+    }
+
+    tr:nth-child(even)
+    {
+      background-color: #eae9e7;
+    }
+    h1 {
+        color: #070707;
+        text-align:center;
+
+    }
+
+      h2 {
+        color: #082c88;
+
+    }
+     h3 {
+        color: red;
+
+    }
+
+        </style>
+    </head>
+    <body>
+     <h1><b>Niyadagala Ambrosia Tea Co Uva(Pvt)Ltd </b></h1><br>
+    <h2>Vehicle Maintenance Report {{ year }} - {{ month }}</h2>
+        <table style="border: 1px solid black; padding-top: 5px; text-align: center;">
+            <tr >
+                <th>ID</th>
+                <th >Bill No </th>
+                <th> Vehicle No</th>
+                <th>Description</th>
+                <th>Service Date</th>
+                <th>Amount</th>
+            </tr>
+
+
+            {% for repair in Vrepairs %}
+        <tr>
+        <td>{{ repair.id}} </td>
+        <td>{{ repair.Bill_No}}</td>
+        <td>{{ repair.VehicleNo}}</td>
+        <td>{{ repair.Description}}</td>
+        <td>{{ repair.Service_Date}}</td>
+        <td>{{ repair.Amount}}</td>
+{% endfor %}
+
+        </table><br>
+
+    <h3>Total Amount: {{ total }}</h3>
+
+    </body>
+
+</html>

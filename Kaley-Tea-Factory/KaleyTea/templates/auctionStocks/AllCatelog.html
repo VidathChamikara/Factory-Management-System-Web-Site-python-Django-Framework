@@ -1,0 +1,190 @@
+{% extends 'auctionStocks/auctionStocksMain.html' %}
+{% load widget_tweaks %}
+{% block contentHeader %}
+<html>
+<header><h2> Final Production Management</h2></header>
+<p> Auction Stock | All Catalog</p>
+
+<hr/>
+<ul>
+  <li><a href="/cat/cat/">Prepare A Catalog</a></li>
+  <li><a href="/allcat/all/">Auction Details</a></li>
+  <li><a href="/BuyerRead/BuyerRead/">Buyer Details</a></li>
+</ul>
+<hr/>
+
+
+<style>
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #4CAF50;
+}
+
+
+
+
+#stock {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+p1 {
+font-size: 30px;
+}
+p {
+  font-size: 35px;
+  color:red;
+}
+#stock td, #stock th {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+
+}
+
+
+#stock tr:nth-child(even){background-color: #f2f2f2;}
+
+#stock tr:hover {background-color: #ddd;}
+
+#stock th {
+font-size: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4caf50;
+  color: white;
+}
+
+td{
+  text-align: center;
+}
+
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.Ubutton {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.Dbutton {
+  background-color: #FF0000;
+  border: none;
+  color: white;
+  padding: 5px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 25px;
+
+}
+
+
+</style>
+
+<body>
+
+<p1>Auction Details</p1>
+<hr/>
+<table id="stock">
+  <tr>
+    <th>ID</th>
+    <th>Stock ID</th>
+    <th>Tea Category</th>
+    <th>Total Weight</th>
+    <th>No of Packages</th>
+    <th>Date Prepared</th>
+    <th>Edit</th>
+
+
+  </tr>
+    {% for auctionD in auctionDetails %}
+  <tr>
+    <td>{{ auctionD.id }}</td>
+    <td>{{ auctionD.stockID }}</td>
+    <td>{{ auctionD.teacat }}</td>
+    <td>{{ auctionD.totWeight }}</td>
+    <td>{{ auctionD.packages }}</td>
+    <td>{{ auctionD.datePrepared }}</td>
+
+    <td>
+        <a href="/editAuction/editAuctionStock/{{ auctionD.id }}" class="Ubutton">Update</a>
+        <a href="/deleteAuction/deleteAuction/{{ auctionD.id }}" class="Dbutton">Delete</a>
+    </td>
+  </tr>
+
+    {% endfor %}
+
+  <tr>
+
+  </tr>
+</table>
+
+<hr/>
+
+<br/>
+
+
+</body>
+
+</html>
+
+{% endblock %}

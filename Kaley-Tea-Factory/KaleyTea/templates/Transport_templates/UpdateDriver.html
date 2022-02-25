@@ -1,0 +1,158 @@
+{% extends 'Transport_templates/transportationBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Transportation Management{% endblock title %}
+
+<!-------------------------Styles------------------------->
+    {% block moreStyles %}
+
+table
+    {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+
+    }
+
+    th
+    {
+      border: 1px solid #dddddd;
+      text-align: center;
+      font-size: 15px;
+      padding: 8px;
+      background: #f5e57f;
+    }
+
+    td
+    {
+      border: 1px solid #dddddd;
+      text-align: left;
+      font-size: 20px;
+      padding: 8px;
+    }
+      tr:nth-child(even)
+    {
+      background-color: #c5f1b8;
+    }
+
+
+
+.regButton {
+    background-color: green; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+    .regButton:hover {
+  background-color: #000000;
+  color: #77fd01;
+}
+
+
+.container1
+{
+    min-width: 500px;
+    width: 90%;
+}
+
+.container1
+{
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #c5f1b8  ;
+    margin-left: 50px;
+    text-align: center;
+}
+ h2 {
+      color: green;
+     margin-left: 10px;
+    }
+.ClassActive {
+    background-color: #8db8e0;
+}
+
+.ClassActive1 {
+    background-color: #2292CF;
+    color: white;
+}
+
+
+    {% endblock moreStyles %}
+
+<!-------------------------Body Menue------------------------->
+{% block recordsBtn %}ClassActive{% endblock recordsBtn %}
+
+<!-----------------------------------Header1-------------------------------------->
+{% block pageContentHeader1 %}Transportation Management{% endblock pageContentHeader1 %}
+
+<!----------------------------------Header2--------------------------------------->
+{% block pageContentHeader2 %}Update Driver Details{% endblock pageContentHeader2 %}
+
+<!----------------------------------Hide Menues--------------------------------------->
+{% block RepairMenu %}{% endblock RepairMenu %}
+
+<!-------------------------Body Sub Menue------------------------->
+{% block addDriverBtn %}ClassActive1{% endblock addDriverBtn %}
+
+<!----------------------------------Body Content--------------------------------------->
+
+{% block content %}
+    <br><br><br><br>
+
+<!---------------------------------Messages-------------------------------------->
+    {% if messages %}
+       {% for message in messages %}
+          <script>alert("{{ message }}");</script>
+    {% endfor %}
+    {% endif %}
+
+
+
+  <!--Update Driver Details Form-->
+
+    <div style="padding-left: 20px;">
+
+        <div class="container1">
+
+            <h2><b>Update Driver</b></h2>
+
+            <form action="{% url 'update_Driver_record' %}" method="post">
+
+                {% csrf_token %}
+
+                <input type = "hidden" name="DID" value="{{ DId }}"/>
+
+                <tr>
+                    <td style="padding-bottom: 10px;"><b><label for="" style="font-size: 20px;">Licence No:</label></b></td>
+                    <td> {{ Dform.licence_no }}</td>
+
+                </tr>
+
+                <tr>
+                    <td style="padding-bottom: 10px;"><b><label for="" style="font-size: 20px;">EPF No:</label></b></td>
+                    <td>{{ Dform.epfNo }}</td>
+
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+
+                        <input class="regButton" type="submit" value="Update" >
+
+                </tr>
+
+            </form>
+
+
+
+
+        </div>
+    </div>
+
+{% endblock content %}

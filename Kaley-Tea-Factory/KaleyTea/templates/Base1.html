@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+<!-------------------------Logo------------------------->
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo.png' %}">
+
+
+<!-------------------------Title------------------------->
+    <title>{% block title %}Kaley Tea Factory{% endblock title %}</title>
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/w3cssfile.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="stylesheet" href="{% static 'css/cloudFlare.css' %}">
+
+
+<!-------------------------Head------------------------->
+    {% block headImport %}
+
+    {% endblock headImport %}
+
+
+<!-------------------------Styles------------------------->
+    <style>
+        body,h1,h2,h3,h4,h5
+        {
+            font-family: "Poppins", sans-serif
+        }
+
+        body {
+            font-size:16px;
+        }
+
+        .logoimg{
+            margin-bottom:-6px;
+            margin-top:16px;
+            opacity: 1;
+            cursor:pointer;
+        }
+
+        .logoimg:hover{
+            opacity: 0.5;
+        }
+
+    {% block headStyles %}
+
+    {% endblock headStyles %}
+
+    </style>
+
+</head>
+
+<body>
+
+<!-------------------------Body Display Message------------------------->
+{% block displayMessage %}
+
+
+{% endblock displayMessage %}
+
+
+<!-------------------------Body Menue------------------------->
+{% block menuBar %}
+<!-- Sidebar/menu -->
+
+<nav class="w3-sidebar w3-green w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+
+
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+
+    <div class="w3-container" >
+
+        <img src="{% static 'images/logoWhite.png' %}" width="300px" height="300px" style="margin-left: -30px;"/>
+
+    </div>
+
+    {% block LinksMenuBar %}
+{#  <div class="w3-bar-block">#}
+{##}
+{#    <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Daily Production</a>#}
+{#    <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white ClassActive">Auction Stock</a>#}
+{#  </div>#}
+
+
+     {% endblock LinksMenuBar %}
+
+</nav>
+
+{% endblock menuBar %}
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-green w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+  <span>Main Menu</span>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-----------------------Content------------------------->
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+  <!-- Header -->
+{% block pageContentHeader %}
+    {#  <div class="w3-container" style="margin-top:80px" id="showcase">#}
+
+    {#    <h1 class="w3-xxxlarge w3-text-green"><b>Employee Salary.</b></h1>#}
+    {#    <hr style="width:50px;border:5px solid #64ff33" class="w3-round">#}
+    {#  </div>#}
+
+{% endblock pageContentHeader %}
+
+<!----------------------------------Main Content------------------------------------------->
+<!----------------------------------------------------------------------------------------->
+
+{% block content %}
+
+
+{% endblock content %}
+
+<!----------------------------------------------------------------------------------------->
+
+
+<!-- End page content -->
+</div>
+
+
+<!---------------------------------- Scripts-------------------------------------------->
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+</script>
+
+</body>
+</html>

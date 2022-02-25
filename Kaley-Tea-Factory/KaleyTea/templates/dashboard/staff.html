@@ -1,0 +1,48 @@
+{% extends "InventorySystem/sideprofile.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Staff Page {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<!-----------------------------Create Inventory Staff Page-------------------------------------->
+<br>
+<div class="card card-body text-white col-md-10" style="margin-left:100px">
+            <h2 class="text-danger text-left"><b>Inventory Staff Member Details</b></h2>
+            <hr class="text-danger">
+    <div class="row my-4">
+        <div class="col-md-12">
+            <table class="table bg-white">
+                <thead class="bg-success text-white">
+                    <tr>
+                        <th scope="col">View</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone No</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Address</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for worker in workers %}
+                    <tr class=" text-dark ">
+                        <th scope="row"><a class="btn btn-info" href="http://127.0.0.1:8000/profile/update/">Update</a></th>
+                        <td>{{ worker.username }}</td>
+                        <td>{{ worker.profile.phone }}</td>
+                        <td>{{ worker.profile.first_name }}</td>
+                        <td>{{ worker.profile.last_name }}</td>
+                        <td>{{ worker.profile.email }}</td>
+                        <td>{{ worker.profile.address }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br><br>
+{% endblock %}

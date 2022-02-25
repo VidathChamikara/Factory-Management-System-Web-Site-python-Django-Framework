@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static '/css/base.css' %}">
+	<link rel="stylesheet" href="{% static '/css/inventorycss/bootstrap.css' %}">
+	 <!--Chart js CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+	<!--Style CSS-->
+    <link rel="stylesheet" href="{% static '/css/inventorycss/style.css' %}">
+	<script src="{% static 'js/base.js' %}"></script>
+    <title> {% block title %} {% endblock %} </title>
+</head>
+<body>
+    <!-- Side navigation bar start -->
+	<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+	<div id="myNav" class="overlay">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div class="sidenav hidescroll">
+			<img class="sideNav-logo" src="{% static 'images/logoWhite.png' %}"/>
+			{% block sideBar %}
+
+			{% endblock %}
+			<a style="margin-top:50px" href="http://127.0.0.1:8000/">Back to HOME</a>
+
+
+			<p class="copyright" >Copyright © 2021 Kaley Tea Factory of Sri Lanka. <br>All Rights Reserved.</p><br/>
+		</div>
+	</div>
+	<!-- Side navigation bar end -->
+
+	<!-- start content -->
+	<div class="main">
+
+		{% include 'inventorySystem/nav.html' %}
+
+
+		{% block content %}
+
+		{% endblock %}
+	<!-- end page content -->
+
+	</div>
+</body>
+</html>

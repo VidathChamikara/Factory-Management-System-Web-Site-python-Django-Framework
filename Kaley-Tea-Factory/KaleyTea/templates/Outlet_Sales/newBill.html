@@ -1,0 +1,192 @@
+{% extends "Outlet_Sales/outleSalesMain.html" %}
+{% load widget_tweaks %}
+
+{% block newBillActive %}classActivePage{% endblock %}
+{% block contentHeader %}
+{% include 'CommonUse/messages.html' %}
+
+<br>
+<h3 style="color: #4caf50">Outlet Sales - Add to Cart</h3>
+<!----------------------------------- START ADD ITEMS ------------------------------>
+<form class="form-inline" method="post" action="/Shop/Outlet/newBill/">
+    {% csrf_token %}
+  <label>Product Name: </label>
+    <select name="product" id="product" class="input" required>
+        <option value="" disabled selected>Select Product...</option>
+        {% for  product in Product %}
+            {% for priceProduct in price %}
+                {% if product.id == priceProduct.product_id %}
+                    <option value="{{ product.id }}">{{ product.cp_name }}/{{ product.weight }}</option>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </select>
+  <label>Quantity: </label>
+      <input class="input" placeholder="Enter QTY..." type="text" name="qty">
+  <button type="submit" class="button button-edit-div">Add Item</button>
+</form>
+<!----------------------------------- END ADD ITEMS ------------------------------>
+<hr><br>
+<!----------------------------------- START TOTAL PRICE & CHECKOUT ------------------------------>
+<h3 style="color: #4caf50">Cart</h3>
+<center>
+    <label class="totalBill">Total Bill: Rs.{{ billTotal }}</label>
+    <input type="button" value="Checkout" onclick="openCheckoutForm()" class="button button-edit-div">
+    <a href="/Shop/Outlet/clearCart/">
+        <input type="button" value="Clear Cart" class="button button-delete" style="font-size:18px;">
+    </a>
+</center>
+<!----------------------------------- END TOTAL PRICE & CHECKOUT ------------------------------>
+<br>
+<!----------------------------------- START CART ITEM LIST ------------------------------>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead><tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Weight</th>
+            <th>Unit Price (Rs.)</th>
+            <th>QTY</th>
+            <th>Sub Total (Rs.)</th>
+            <th>Remove Item</th>
+        </tr></thead>
+        <tbody>
+            {% for  product in Product %}
+                {% for price in price %}
+                    {% for item in cart %}
+                        {% for sub in subTotal %}
+                            {% if product.id == price.product_id and product.id == item.product_id and product.id == sub.id %}
+                                <tr>
+                                    <td>{{ product.id }}</td>
+                                    <td>{{ product.cp_name }}</td>
+                                    <td>{{ product.category }}</td>
+                                    <td>{{ product.weight }}</td>
+                                    <td>{{ price.product_price }}</td>
+                                    <td>
+                                        <form method="get" action="/Shop/Outlet/updateCart/">
+                                            <input type="hidden" value="{{ product.id }}" name="updateItemId">
+                                            <input type="submit" name="decreaseQTY" value="-" class="changeQTYButton decreaseQTYButton">
+                                            {{ item.QTY }}
+                                            <input type="submit" name="increaseQTY" value="+" class="changeQTYButton increaseQTYButton">
+                                        </form>
+                                    </td>
+                                    <td>{{ sub.subTol }}</td>
+                                    <td>
+                                        <span class="removeFromCart" onclick="openDeleteForm(), removeFromCart({{ product.id }}, '{{ product.cp_name }}', '{{ product.category }}', '{{ product.weight }}', {{ price.product_price }}, {{ item.QTY }}, {{ sub.subTol }})">X</span>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="font-size: 20px; font-weight: bold;">Total Bill: </td>
+                <td style="font-size: 20px; font-weight: bold;">Rs.{{ billTotal }}</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table></div><br/>
+<!----------------------------------- END CART ITEM LIST ------------------------------>
+
+<!----------------------------------- START CHECKOUT POP ------------------------------>
+<div class="PriceModelBox" id="checkoutForm">
+    <div class="modal-content-my">
+        <div class="modal-header-my">
+            <span class="close" onclick="closeCheckoutForm()">&times;</span>
+            <p>Please complete the payment...</p>
+        </div>
+
+        <form method="post" class="post-form" action="/Shop/Outlet/checkout/">
+            {% csrf_token %}
+            <div class="modal-body-my">
+                <table id="confirmPayment">
+                    <tr>
+                        <th><label>Bill Amount (Rs.)</label></th>
+                        <td style="width:20px">:</td>
+                        <td>
+                            <label id="totalAmount">{{ billTotal }}</label>
+                            <input type="hidden" name="totalAmount" value="{{ billTotal }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label>Cash (Rs.)</label></th>
+                        <td style="width:20px">:</td>
+                        <td><input id="givenCash" name="givenCash" type="text" required></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer-my">
+                <center><button type="submit" class="button button-edit-div">CONFIRM PAYMENT</button></center>
+            </div>
+        </form>
+    </div>
+</div>
+<!----------------------------------- END CHECKOUT POP ------------------------------>
+
+<!----------------------------------- START REMOVE ITEM FROM CART DIV ------------------------------>
+<div class="PriceModelBox" id="deleteForm">
+    <div class="modal-content-my">
+        <div class="modal-header-delete">
+            <span class="close" onclick="closeDeleteForm()">&times;</span>
+            <p>Are you sure you want to remove this item from cart?</p>
+        </div>
+
+        <form method="post" class="post-form" action="/Shop/Outlet/removeFromCart/">
+        {% csrf_token %}
+            <div class="modal-body-my">
+                <table id="deletePriceTable">
+                    <tr>
+                        <th><label>Product ID</label></th>
+                        <td style="width:20px">:</td>
+                        <td><label id="deleteid"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Name</label></th>
+                        <td>:</td>
+                        <td><label id="deletename"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Category</label></th>
+                        <td>:</td>
+                        <td><label id="deletecategory"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Weight</label></th>
+                        <td>:</td>
+                        <td><label id="deleteweight"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Unit Price (Rs.)</label></th>
+                        <td>:</td>
+                        <td><label id="deleteprice"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>QTY</label></th>
+                        <td>:</td>
+                        <td><label id="deleteqty"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Sub Total (Rs.)</label></th>
+                        <td>:</td>
+                        <td><label id="deletesubtot"></label></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer-delete">
+                <input id="deleteidpass" name="deleteidpass" type="hidden">
+                <center><button type="submit" class="button button-delete-div">CONFIRM</button></center>
+            </div>
+        </form>
+    </div>
+</div>
+<!----------------------------------- END REMOVE ITEM FROM CART DIV ------------------------------>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'supplierreg/suppliermain.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block contentHeader %}
+<html>
+<head>
+<style>
+table {
+  border: 4px solid #4caf50;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 2px solid #dddddd;
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(1) {
+  background-color: #4caf50;
+}
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  background-color: green;
+  opacity: 1;
+}
+.Ubutton{
+background-color: #04AA6D;
+boarder: none;
+color: white;
+padding: 5px 10px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 4px;
+cursor: pointer;
+boarder-radius: 25px;
+}
+
+.Ubutton:hover {
+  background-color: red;
+  opacity: 1;
+}
+
+
+.Dbutton{
+background-color: #FF0000;
+boarder: none;
+color: white;
+padding: 5px 10px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 4px;
+cursor: pointer;
+boarder-radius: 25px;
+}
+.Dbutton:hover {
+  background-color: green;
+  opacity: 1;
+}
+
+h1 {
+  color: red;
+}
+</style>
+</head>
+<body>
+<center>
+{% if messages %}
+      {% for message in messages %}
+      <h2 style="color: red;">{{message}}</h2>
+      {% endfor %}
+      {% endif %}
+</center>
+<hr>
+<h1>Registered Suppliers</h1>
+<hr>
+<a href="http://127.0.0.1:8000/Supplier/Reg/supplierReg/"><button type="submit" class="registerbtn">+  Add New Supplier</button></a>
+
+
+<br><br><br><br>
+
+
+<table>
+  <tr>
+  <th>Supplier ID</th>
+  <th>NIC</th>
+  <th>Supplier Name</th>
+  <th>Contact No</th>
+  <th>Action</th>
+  </tr>
+   {% for register in Reg_list %}
+  <tr>
+  <td>{{ register.id }}</td>
+  <td>{{ register.Nicno }}</td>
+  <td>{{ register.Fullname }}</td>
+  <td>{{ register.Contactnum }}</td>
+  <td><a href="http://127.0.0.1:8000/Supplier/Edit/supplierEdit/{{ register.id }}" class="Ubutton">Update</a><a href="http://127.0.0.1:8000/Sup/Delete/supDelete/{{ register.id }}" class="Dbutton">Delete</a></td>
+  </tr>
+ {% endfor %}
+</table>
+
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,223 @@
+{% extends 'Transport_templates/transportationBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Transportation Management{% endblock title %}
+
+<!------------------------------------Scripts-------------------------------------->
+ {% block headImport1 %}
+
+ <script src="https://kit.fontawesome.com/f78ce457b0.js" crossorigin="anonymous"></script>
+
+{% endblock %}
+
+<!-------------------------Styles------------------------->
+    {% block moreStyles %}
+
+
+
+table
+    {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+
+    }
+
+    th
+    {
+      border: 1px solid #dddddd;
+      text-align: center;
+      font-size: 15px;
+      padding: 8px;
+      background: #f5e57f;
+    }
+
+    td
+    {
+      border: 1px solid #dddddd;
+      text-align: left;
+      font-size: 20px;
+      padding: 8px;
+    }
+
+    tr:nth-child(even)
+    {
+      background-color: #c5f1b8;
+    }
+
+
+
+
+.regButton {
+    background-color: green; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+.regButton:hover{
+      background-color: #000000;
+  color: #77fd01;
+}
+ .regButton2 {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+    .regButton2:hover {
+  background-color: #000000;
+  color: red;
+}
+.ClassActive {
+    background-color: #8db8e0;
+}
+
+.ClassActive1 {
+    background-color: #2292CF;
+    color: white;
+}
+.container1
+{
+    margin-top: 20px;
+    background-color: #F5FFED ;
+    padding: 10px;
+    margin-left:20px;
+    text-align: center;
+}
+
+ .container1,.container2
+{
+    min-width: 500px;
+    width: 90%;
+}
+.container2
+{
+    margin-left:20px;
+    padding: 10px;
+}
+
+.container2 th
+{
+    background-color:#a9afe7 ;
+}
+h2 {
+      color: #082c88;
+    }
+
+    {% endblock moreStyles %}
+
+<!-------------------------Body Menue------------------------->
+{% block recordsBtn %}ClassActive{% endblock recordsBtn %}
+
+<!-----------------------------------Header1-------------------------------------->
+{% block pageContentHeader1 %}Transportation Management{% endblock pageContentHeader1 %}
+
+<!----------------------------------Header2--------------------------------------->
+{% block pageContentHeader2 %}Vehicle Records Table{% endblock pageContentHeader2 %}
+
+<!----------------------------------Hide Menues--------------------------------------->
+   {% block RepairMenu %}{% endblock RepairMenu %}
+
+<!-------------------------Body Sub Menue------------------------->
+{% block recordTableBtn %}ClassActive1{% endblock recordTableBtn %}
+
+<!---------------------------------Messages-------------------------------------->
+{% if messages %}
+    {% for message in messages %}
+      <script>alert("{{ message }}");</script>
+    {% endfor %}
+{% endif %}
+
+<!----------------------------------Body Content--------------------------------------->
+
+{% block content %}
+<br>
+<!----search---->
+    <div class="container1">
+        <form action="{% url 'searchRecords' %}" method="post">
+
+            <h2><b>Search Vehicle Records</b></h2>
+        {% csrf_token %}
+
+            <td><input type="text" name="vehicleno" placeholder="Vehicle Number" required></td>
+
+            <td><input type="number" name="month" placeholder="Input Month" required></td>
+
+            <td><input type="number" name="year" placeholder="Input Year" required></td>
+
+
+            <button type="submit" class="regButton2">Search&nbsp;<i class="fas fa-search"></i></button>
+
+    </form>
+    </div>
+
+    {% if messages %}
+       {% for message in messages %}
+          <script>alert("{{ message }}");</script>
+    {% endfor %}
+    {% endif %}
+
+<br><br>
+
+<!---Records table--->
+<div class="container2">
+  <h2><b>Driving Records</b></h2><br>
+
+       <table>
+              <tr >
+                 <th>ID</th>
+                <th>Vehicle No</th>
+                <th>Date</th>
+                <th>Start Readings </th>
+                <th>End Readings</th>
+                <th>Meter Difference</th>
+                <th>Delete</th>
+
+
+
+            {% for record in records %}
+
+        <tr>
+        <td>{{ record.id }}</td>
+        <td>{{ record.VehicleNo}}</td>
+        <td>{{ record.Date}} </td>
+        <td>{{ record.Start_Reading}}</td>
+        <td>{{ record.End_Reading}}</td>
+        <td>{{ record.Meter_Difference }}</td>
+
+
+
+         <form method="post" action=" {% url 'delete_driving_records' %}">
+                    {% csrf_token %}
+             <input type = "hidden" name="id" value="{{ record.id }}"/>
+
+             <td><input type="submit" class = "regButton" value="Delete" onclick="if (!confirm('Are you sure You Want to Delete?.Press Ok To Confirm.')) { return false }" /></td>
+
+         </form>
+
+
+
+
+
+
+        </tr>
+        {% endfor %}
+
+
+       </table>
+
+
+  </div>
+
+
+{% endblock content %}

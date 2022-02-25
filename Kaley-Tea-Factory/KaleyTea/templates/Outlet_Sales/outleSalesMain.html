@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sideBar %}
+<link rel="stylesheet" href="{% static 'css/outletSales.css' %}">
+<script src="{% static 'js/outletSales.js' %}"></script>
+
+<!-- BOOSTRAP -->
+<link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
+
+<!-- SIDE NAVIGATION OPTIONS -->
+    <a href="{% url 'price-table' %}" class="{% block priceTableActive %}{% endblock %}">Add & View Prices</a>
+    <a href="{% url 'new-bill' %}" class="{% block newBillActive %}{% endblock %}">New Bill</a>
+    <a href="{% url 'transactions' %}" class="{% block transactionsActive %}{% endblock %}">Transactions</a>
+    <a href="{% url 'sales-reports' %}" class="{% block salesReportsActive %}{% endblock %}">Sales Reports</a>
+{% endblock %}

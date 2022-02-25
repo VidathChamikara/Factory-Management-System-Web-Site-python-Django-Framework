@@ -1,0 +1,44 @@
+{% extends 'Outlet_Stock/shopInventoryBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Tea Shop Inventory Management{% endblock title %}
+
+<!-------------------------Head------------------------->
+    {% block headImport %}
+
+    {% endblock headImport %}
+
+{% block pageContentHeader1 %}Sales Inventory Management{% endblock pageContentHeader1 %}
+
+{% block pageContentHeader2 %}Available Stock{% endblock pageContentHeader2 %}
+
+{% block stockbtn %}ClassActive{% endblock stockbtn %}
+
+{% block content %}
+
+<!-- table -->
+    <div>
+        <table class="center">
+            <tr>
+                <th>Category</th>
+                <th>Weight</th>
+                <th>Available Stock</th>
+            </tr>
+
+            {% for st in stock %}
+                <tr>
+
+                    <td>{{ st.category }}</td>
+                    <td>{{ st.weight }}</td>
+                    <td>{{ st.available_stock }}</td>
+
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+    <!-- End page content -->
+
+
+{% endblock content %}

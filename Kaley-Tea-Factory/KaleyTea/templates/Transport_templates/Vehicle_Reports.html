@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+
+
+        <title>Transportation Reports</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+
+            .title span {
+                color: #007cae;
+            }
+        table
+    {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th
+    {
+      border: 1px solid #dddddd;
+      text-align: center;
+      font-size: 15px;
+      padding: 8px;
+      background: #d9a9e7;
+    }
+
+    td
+    {
+      border: 1px solid #e7e5e5;
+      text-align: left;
+      font-size: 12px;
+      padding: 8px;
+    }
+
+    tr:nth-child(even)
+    {
+      background-color: #eae9e7;
+    }
+     h1 {
+        color: #0a0a0a;
+        text-align:center;
+
+    }
+    h2 {
+        color: #082c88;
+
+    }
+     h3 {
+        color: red;
+
+    }
+        </style>
+    </head>
+    <body>
+    <h1><b>Niyadagala Ambrosia Tea Co Uva(Pvt)Ltd </b></h1><br>
+    <h2>Transportation Report {{ year }} - {{ month }}</h2>
+        <table style="border: 1px solid black; padding-top: 5px; text-align: center;">
+              <tr >
+                 <th>ID</th>
+                <th>Vehicle No</th>
+                <th>Date</th>
+                <th>Start Readings </th>
+                <th>End Readings</th>
+                <th>Meter Difference</th>
+
+              </tr>
+
+            {% for record in Vrecords %}
+
+        <tr>
+        <td>{{ record.id }}</td>
+        <td>{{ record.VehicleNo}}</td>
+        <td>{{ record.Date}} </td>
+        <td>{{ record.Start_Reading}}</td>
+        <td>{{ record.End_Reading}}</td>
+         <td>{{ record.Meter_Difference }}</td>
+
+
+        </tr>
+            {% endfor %}
+
+        </table><br>
+
+    <h3>Total Distance: {{ total }}</h3>
+
+    </body>
+
+</html>

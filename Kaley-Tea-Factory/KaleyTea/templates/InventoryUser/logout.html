@@ -1,0 +1,28 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Logout Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br><br>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <div class="border bg-light p-3">
+                <h2 class="text-danger">Inventory Login System</h2>
+                <hr>
+                <div class="alert alert-danger">
+                    <h3> Are You Sure, <br> You Want To Log Out Inventory System ? <br>click OK to Log Out Inventory System'</h3>
+                </div>
+<!--                <a class="btn btn-danger" href="{% url 'user-login %}">Sign Up</a>-->
+                 <form method = "POST" action="{% url 'user-login %}">
+                 <button type="submit" value="Logout">Logout</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+{% endblock %}

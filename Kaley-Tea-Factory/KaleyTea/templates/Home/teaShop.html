@@ -1,0 +1,51 @@
+{% load static %}
+<!--Dashboard Display-->
+<div class="row">
+    <div class="col-md-12 mt-4">
+        <div class="card">
+            <div class="card-header bg-light text-success text-center">
+                <h1>Tea Shop</h1>
+                <div class="card-body text-center">
+                    <img src="{% static 'images/shop.png' %}" style="height:100px;"/>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="text-decoration-none text-dark" href="/Shop/InventoryHome">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <img src="{% static 'images/outlet.png' %}" style="height:100px;"/>
+                                    <h4> Outlet Inventory <i class="fas fa-users"></i></h4>
+
+                                </div>
+                            </div>
+                        </a>
+                   <br>
+                        <a class="text-decoration-none text-dark" href="/Shop/Outlet/newBill/">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <img src="{% static 'images/sale.png' %}" style="height:100px;"/>
+                                    <h4> Sales Management <i class="fas fa-box"></i></h4>
+
+                                </div>
+                            </div>
+                        </a>
+                   <br>
+                        <a class="text-decoration-none text-dark" href="#">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <img src="{% static 'images/inventry.png' %}" style="height:100px;"/>
+                                    <h4> Inventory Orders <i class="fas fa-shipping-fast"></i></h4>
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--End display-->

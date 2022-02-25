@@ -1,0 +1,28 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Delete Page {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!-----------------------------Create Delete Inventory Page-------------------------------------->
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="border bg-white p-3">
+                <h2>Delete Inventory Items</h2>
+                <hr>
+                <div class="alert alert-danger">
+                    <h3> Are You Sure, You want To Delete Inventory Items? </h3>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <a class="btn btn-secondary" href="{% url 'dashboard-product' %}">Cancel</a>
+                    <input class="btn btn-danger" type="submit" value="Confirm">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

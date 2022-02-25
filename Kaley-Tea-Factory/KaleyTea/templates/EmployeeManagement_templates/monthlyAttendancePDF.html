@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Daily Attendance</title>
+     <style type="text/css">
+        body {
+            font-weight: 200;
+            font-size: 14px;
+        }
+        .title span {
+            color: #007cae;
+
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+
+
+<body>
+<h1><center><b>------------------------------------------------------------------------------------------------</b></center></h1>
+<h1><center><b>Kaley Tea Factory</b></center></h1>
+<h1><center><b>------------------------------------------------------------------------------------------------</b></center></h1>
+<h1><center><u>Daily Attendance of Factory Workers</u></center></h1>
+
+ <h1>Date : {{ date }}</h1>
+
+    <table style = "border:1px solid black;">
+        <tr>
+            <th>EPF No</th>
+            <th>NIC</th>
+            <th>Name</th>
+            <th>Day Type</th>
+            <th>Attendance</th>
+
+        </tr>
+
+       {% for att in attendance %}
+           <tr>
+
+               <td>{{ att.empID.epfNo }}</td>
+               <td>{{ att.empID.nic }}</td>
+               <td>{{ att.empID.name }}</td>
+               <td>{{ att.daytype }}</td>
+               <td>{{ att.attendaceStatus }}</td>
+
+           </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>

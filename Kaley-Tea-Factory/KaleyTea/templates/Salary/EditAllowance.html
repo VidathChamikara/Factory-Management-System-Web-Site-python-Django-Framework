@@ -1,0 +1,38 @@
+{% extends 'Salary/BaseMenu.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block contentHeader %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Allowance</title>
+</head>
+<body>
+    <h3 style="color: #4caf50"> EDIT ALLOWANCE </h3>
+    <br><br><br><br>
+
+    <form method="POST" action="update_allowance{{ Aid }}">
+        {% csrf_token %}
+        <label>Employee ID  : </label>
+        {{ allowanceForm.emp_id }}
+        <br><br>
+
+        <label>Allowance by price    :</label>
+        {{ allowanceForm.allowance_by_price }}
+        <br><br>
+
+        <label>Incentive 1   :</label>
+        {{ allowanceForm.incentive_1 }}
+        <br><br>
+
+        <label>Incentive 2</label>
+        {{ allowanceForm.incentive_2 }}
+        <br><br>
+        <button class="link_button" id="AllowBtn">SUBMIT</button>
+    </form>
+</body>
+</html>
+
+{% endblock %}

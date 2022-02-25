@@ -1,0 +1,74 @@
+{% extends 'Salary/BaseMenu.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block contentHeader %}
+
+<html lang="en">
+{% include 'CommonUse/messages.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate Salary</title>
+    <link rel="stylesheet" href="{% static 'css/Salary.css' %}">
+    <script src="{% static 'js/Salary.js' %}"></script>
+</head>
+<body>
+    <h1 style="color: #4caf50">CALCULATE SALARY</h1>
+    <br><br><br><br>
+
+    <form method="POST" action="#" class="form-inline">
+        {% csrf_token %}
+        <div class="table-wrapper">
+            <table class="rate_table">
+                <tr>
+                    <td>Enter Employee ID :</td>
+                    <td>Enter Month :</td>
+                    <td>Enter Year :</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="empID" required>
+                    </td>
+                    <td>
+                        <input type="number" name="month" required>
+                    </td>
+                    <td>
+                        <input type="number" name="year" required>
+                    </td>
+                </tr>
+            </table><br><br>
+
+            <table class="fl-table">
+                <thead>
+                    <tr>
+                        <th>Attendance</th>
+                        <th>Basic Salary</th>
+                        <th>OT Hours</th>
+                        <th>Loans</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>
+                        <input name="attendance" type="number">
+                    </td>
+                    <td>
+                        <input name="basic_sal" type="number">
+                    </td>
+                    <td>
+                        <input name="ot_hours" type="number">
+                    </td>
+                    <td>
+                        <input name="loans" type="number">
+                    </td>
+                    <td>
+                        <input type="submit" class="button button-search" value="CALCULATE AND ADD">
+                    </td>
+                </tr>
+            </table>
+            <br><br>
+        </div>
+    </form>
+</body>
+</html>
+
+{% endblock %}

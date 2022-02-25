@@ -1,0 +1,244 @@
+{% extends 'Transport_templates/transportationBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Transportation Management{% endblock title %}
+
+<!-------------------------Styles------------------------->
+    {% block moreStyles %}
+
+
+table
+    {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+
+    }
+
+    th
+    {
+      border: 1px solid #dddddd;
+      text-align: center;
+      font-size: 15px;
+      padding: 8px;
+      background: #a9afe7;
+    }
+
+    td
+    {
+      border: 1px solid #dddddd;
+      text-align: left;
+      font-size: 20px;
+      padding: 8px;
+    }
+
+    tr:nth-child(even)
+    {
+      background-color: #c5f1b8;
+    }
+
+
+.regButton {
+    background-color: green; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+    .regButton:hover {
+  background-color: #000000;
+  color: #77fd01;
+}
+    .regButton2 {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+    .regButton2:hover {
+  background-color: #000000;
+  color: #fd4201;
+}
+
+  .regButton3 {
+    background-color: darkblue;
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+    .regButton3:hover {
+  background-color: #000000;
+  color: blue;
+}
+.ClassActive {
+    background-color: #8db8e0;
+}
+
+.ClassActive1 {
+    background-color: #2292CF;
+    color: white;
+}
+
+.container1, .container2
+{
+    min-width: 500px;
+    width: 90%;
+}
+
+.container1
+{
+    margin-top: 20px;
+    background-color: #F5FFED ;
+    padding: 10px;
+    text-align: center;
+}
+
+
+.container2
+{
+    margin-left:20px;
+    padding: 10px;
+}
+
+.container2 th
+{
+    background-color:#a9afe7 ;
+}
+
+ h2 {
+      color: #082c88;
+    }
+
+
+    {% endblock moreStyles %}
+
+<!-------------------------Body Menue------------------------->
+ {% block recordsBtn %}ClassActive{% endblock recordsBtn %}
+
+<!-----------------------------------Header1-------------------------------------->
+{% block pageContentHeader1 %}Transportation Management{% endblock pageContentHeader1 %}
+
+<!----------------------------------Header2--------------------------------------->
+{% block pageContentHeader2 %}Add Driver Details{% endblock pageContentHeader2 %}
+
+<!----------------------------------Hide Menues--------------------------------------->
+     {% block RepairMenu %}{% endblock RepairMenu %}
+
+<!-------------------------Body Sub Menue------------------------->
+{% block addDriverBtn %}ClassActive1{% endblock addDriverBtn %}
+
+
+<!----------------------------------Body Content--------------------------------------->
+{% block content %}
+    <br><br>
+
+
+<!---------------------------------Messages-------------------------------------->
+    {% if messages %}
+       {% for message in messages %}
+          <script>alert("{{ message }}");</script>
+    {% endfor %}
+    {% endif %}
+
+
+  <!--Add Driver Details Form-->
+  <div style="padding-left: 20px;">
+
+      <div class="container1">
+
+          <form action="{% url 'Transport' %}" method="post">
+              {% csrf_token %}
+
+              <h2><b>Add Driver</b></h2>
+
+              <tr>
+                  <td style="padding-bottom: 10px;"><b><label for="" style="font-size: 20px;">Licence No:</label></b></td>
+                  <td>&emsp;{{ VDform.driverForm.licence_no}}</td>
+              </tr>
+              <tr>
+                  <td style="padding-bottom: 10px;"><b><label for="status" style="font-size: 20px;">EPF No:</label></b></td>
+                  <td>&emsp;{{ VDform.driverForm.epfNo}}</td>
+              </tr>
+
+              <tr>
+                  <td></td>
+                  <td>
+                      <input class="regButton3" type="submit" value="ADD">
+
+                  </td>
+              </tr>
+
+          </form>
+
+
+          <br><br>
+
+  </div>
+  </div>
+    <br>
+
+  <!-- Driver Details Table-->
+<div class="container2">
+    <table>
+        <h2><b>Driver Details</b></h2><br>
+
+        <th>ID</th>
+        <th> Licence No </th>
+        <th> EPF No</th>
+        <th> Delete </th>
+        <th>Edit</th>
+
+
+            {% for driver in AllDriver %}
+        <tr>
+
+            <td>{{ driver.id }}</td>
+            <td>{{ driver.licence_no}} </td>
+            <td>{{ driver.epfNo}}</td>
+
+         <form method="post" action=" {% url 'delete_Driver_record' %}">
+                    {% csrf_token %}
+             <input type = "hidden" name="id" value="{{ driver.id }}"/>
+             <td><input type="submit" class = "regButton" value="Delete" onclick="if (!confirm('Are you sure You Want to Delete?.Press Ok To Confirm.')) { return false }" /></td>
+
+         </form>
+
+          <form method="post" action=" {% url 'ShowDriver' %}">
+                    {% csrf_token %}
+             <input type = "hidden" name="Did" value="{{ driver.id }}"/>
+             <td><input type="submit" class = "regButton2" value="Update"></td>
+
+         </form>
+
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+<!--------------Errors--------------------------------------->
+
+      {% if VDform.driverForm.errors %}
+
+          <div class="errorDisplay" style="background-color: #faff8a; color:#de2028; padding: 5px; ">
+              <h3 style="font-weight: bold">{{ VDform.driverForm.errors }}</h3>
+          </div>
+      {% endif %}
+</div>
+
+{% endblock content %}

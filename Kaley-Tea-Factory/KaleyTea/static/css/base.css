@@ -1,0 +1,112 @@
+:root {
+    --sideNaviWidth: 300px;
+    --mainColor : #4caf50;
+
+}
+body {
+  color: #324960;
+  font-family: sans-serif;
+}
+
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+  max-width: 350px;
+  background-color: var(--mainColor);
+  overflow: hidden;
+}
+
+.overlay .closebtn {
+  color: white;
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  font-size: 40px;
+  z-index: 3;
+}
+
+.sidenav {
+  height: 100%;
+  width: var(--sideNaviWidth);
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--mainColor);
+  overflow-x: hidden;
+  margin-bottom:20px;
+  padding-top: 20px;
+}
+
+.sideNav-logo {
+    width: var(--sideNaviWidth);
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 22px;
+  color: white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #324960;
+  background-color: white;
+}
+
+.sidenav h1 {
+    align: center;
+    color: white;
+}
+
+.classActivePage {
+    background-color: #327835;
+}
+
+.copyright {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+}
+
+.main {
+  margin-left: var(--sideNaviWidth);
+  font-size: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hidescroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hidescroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+@media screen and (max-width: 700px) {
+  .sidenav {
+    width: 100%;
+    position: relative;
+  }
+  .sidenav a {
+    float: left;
+    width: 100%;
+    font-size: 18px;
+
+  }
+  .main {margin-left: 0px;}
+}
+
+

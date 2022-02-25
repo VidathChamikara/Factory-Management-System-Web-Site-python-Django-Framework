@@ -1,0 +1,70 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Add Product Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<center>
+<div class="row my-3" >
+    <div class="col-md-10">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+<br>
+<!-----------------------------Create Add Inventory Page-------------------------------------->
+
+        <div class="card card-body bg-light" style="margin-left:200px" >
+            <h2 class="text-success">Add Inventory Products</h2>
+            <hr>
+           <form method="post" action="{% url 'NavigateToTeaGrades' %}">
+        {% csrf_token %}
+
+        <label>Add new tea category:</label>
+        {{ form.teaGrade }}
+
+       <input type="submit" value="Add" class="btn btn-success btn-block">
+
+    </form>
+
+        </div>
+    </div>
+</div>
+
+     <div class="row my-3">
+        <div class="col-md-10">
+
+         <div class="card card-body bg-light" style="margin-left:200px" >
+            <h2 class="text-success">Tea Grades</h2>
+            <hr>
+           <table>
+            <tr>
+                <th>ID</th>
+                <th>Tea Category</th>
+                <th>Action</th>
+            </tr>
+            {% for grade in grade %}
+                <tr>
+                    <td>{{ grade.id }}</td>
+                        <td>{{ grade.teaGrade }}</td>
+                        <td><form method="post" action="{% url 'deleteGrade' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="grade" value="{{ grade.id }}"/>
+                                <input type="submit" value="Delete" class="btn btn-success btn-block"><br>
+                            </form></td>
+                </tr>
+            {% endfor %}
+        </table>
+         <br><br>
+        </div>
+    </div>
+</div>
+</center>
+{% endblock %}

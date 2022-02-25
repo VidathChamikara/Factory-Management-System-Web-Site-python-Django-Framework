@@ -1,0 +1,66 @@
+{% extends 'Outlet_Stock/shopInventoryBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Tea Shop Inventory Management{% endblock title %}
+
+<!-------------------------Head------------------------->
+    {% block headImport %}
+
+    {% endblock headImport %}
+
+{% block pageContentHeader1 %}Sales Inventory Management{% endblock pageContentHeader1 %}
+
+{% block pageContentHeader2 %}Add Tea Packets{% endblock pageContentHeader2 %}
+
+
+
+{% block addteabtn %}ClassActive{% endblock addteabtn %}
+
+
+{% block content %}
+  <!-- form -->
+    <br>
+    <form method="post" action={% url 'addteapackets' %}>
+
+        {%  csrf_token %}
+        <table>
+        <tr class="form-group" style="background-color:#FFF0F5;">
+            <td style="text-align: left;"><label for="date" style="font-weight: 700;">Date: </label> </td>
+            <td style="text-align: left;">{{ form.date }} </td>
+
+        </tr>
+        <br>
+
+        <tr class="form-group" style="background-color:#FFF0F5;">
+            <td style="text-align: left;"><label for="name" style="font-weight: 700;">Category Product Name: </label> </td>
+            <td style="text-align: left;">{{ form.categoryProductID }} </td>
+        </tr>
+        <br>
+        <tr class="form-group" style="background-color:#FFF0F5;">
+            <td style="text-align: left;"><label for="noofpackets" style="font-weight: 700;">Number of packets: </label> </td>
+
+            <td style="text-align: left;">{{ form.noOfPackets }} </td>
+            <br>
+        </tr>
+        </table>
+<br>
+
+
+        <div class="form-group">
+
+            <button type="submit" class="btn1" style="padding: 6px 25px;">ADD</button>
+
+        </div>
+        <br>
+    </form>
+
+    {% if form.errors %}
+
+        <div class="errorDisplsy" style="background-color: #faff8a; color: #de2020; padding: 5px">
+        <h3 style="font-weight: bold">{{ form.errors }} </h3>
+
+    {%  endif %}
+<!-- End page content -->
+</div>
+
+{% endblock content %}

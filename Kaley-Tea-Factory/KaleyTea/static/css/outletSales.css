@@ -1,0 +1,424 @@
+/******* COLORS *************
+    main: #4caf50
+    delete red: #D11A2A
+    Dark in table: #324960
+****************************/
+body {
+  color: #324960;
+  font-family: sans-serif;
+}
+
+/*************************************************** START ADD PRODUCT PRICE ***********************************************/
+.form-inline {
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline label {
+  margin: 5px 15px;
+}
+
+.form-inline .input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/*************************************************** END ADD PRODUCT PRICE ***********************************************/
+
+/*************************************************** START EDIT PRICE DIV ***********************************************/
+/* The Edit Price Modal (background) */
+.PriceModelBox {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Edit Price Modal Content */
+.modal-content-my {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 450px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header-my {
+  padding: 16px;
+  background-color: #4caf50;
+  color: white;
+}
+.modal-body-my {padding: 16px;}
+.modal-footer-my {
+  padding: 16px;
+  background-color: #4caf50;
+  color: white;
+}
+
+.modal-header-delete {
+  padding: 16px;
+  background-color: #D11A2A;
+  color: white;
+}
+.modal-footer-delete {
+  padding: 16px;
+  background-color: #D11A2A;
+  color: white;
+}
+
+#editPriceTable th {
+    text-align: left;
+    padding-right: 20px;
+}
+
+#deletePriceTable th {
+    text-align: left;
+    padding-right: 20px;
+}
+
+/*************************************************** END EDIT PRICE DIV ***********************************************/
+
+/*************************************************** START MAIN TABLE ***********************************************/
+
+.table-wrapper {
+    margin: 10px 70px 70px;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+.fl-table {
+    font-size: 18px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td,
+.fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 16px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #4caf50;
+}
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+    .fl-table {
+        display: block;
+        width: 100%;
+    }
+    .table-wrapper:before {
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: white;
+        padding: 0 0 10px;
+    }
+    .fl-table thead,
+    .fl-table tbody,
+    .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child {
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td,
+    .fl-table th {
+        padding: 20px 0.625em 0.625em 0.625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tbody tr:nth-child(odd) {
+        background: none;
+    }
+    .fl-table tr:nth-child(even) {
+        background: transparent;
+    }
+    .fl-table tr td:nth-child(odd) {
+        background: #f8f8f8;
+        border-right: 1px solid #e6e4e4;
+    }
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid #e6e4e4;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+}
+
+/*************************************************** END MAIN TABLE ***********************************************/
+
+/*************************************************** START BUTTONS ***********************************************/
+.button {
+  background-color: ##4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button-edit {
+  background-color: white;
+  color: #4caf50;
+  border: 2px solid #4caf50;
+}
+
+.button-edit:hover {
+  background-color: #4caf50;
+  color: white;
+}
+
+.button-delete {
+  background-color: white;
+  color: #D11A2A;
+  border: 2px solid #D11A2A;
+}
+
+.button-delete:hover {
+  background-color: #D11A2A;
+  color: white;
+}
+
+.button-edit-div:hover {
+  background-color: white;
+  color: #4caf50;
+  border: 2px solid #4caf50;
+  padding: 8px 25px;
+  font-size: 18px;
+}
+
+.button-edit-div {
+  background-color: #4caf50;
+  color: white;
+  border: 2px solid white;
+  padding: 8px 25px;
+  font-size: 18px;
+}
+
+.button-delete-div:hover {
+  background-color: white;
+  color: #D11A2A;
+  border: 2px solid #D11A2A;
+  padding: 8px 10px;
+  font-size: 18px;
+}
+
+.button-delete-div {
+  background-color: #D11A2A;
+  color: white;
+  border: 2px solid white;
+  padding: 8px 10px;
+  font-size: 18px;
+}
+/*************************************************** END BUTTONS ***********************************************/
+
+/*************************************************** START SEARCH BAR ***********************************************/
+.search-container {
+    padding: 5px 20px;
+}
+.search-container input[type=text] {
+  width: 200px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  font-size: 16px;
+  background-color: white;
+  padding: 8px 20px 8px 20px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+.search-container input[type=date] {
+  width: 200px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  font-size: 16px;
+  background-color: white;
+  padding: 8px 20px 8px 20px;
+}
+.search-container-price input[type=text]:focus {
+  width: 50%;
+}
+/*************************************************** END SEARCH BAR ***********************************************/
+
+/************************************************** START NEW BILL *****************************************************/
+.totalBill {
+    font-size: 25px;
+    padding-right: 25px;
+    font-weight: bold;
+    color: #324960;
+}
+
+/* BUTTONS */
+.changeQTYButton {
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+    margin: 10px;
+}
+.decreaseQTYButton {
+    color: #D11A2A;
+}
+.increaseQTYButton {
+    color: #4caf50;
+}
+.removeFromCart {
+    color: #D11A2A;
+    font-size: 15px;
+    border: none;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+.removeFromCart:hover {
+    cursor: pointer;
+    background-color: #D11A2A;
+    color: white;
+}
+/************************************************ END NEW BILL *****************************************************/
+
+/********************************************** START BILL DETAILS **************************************************/
+.billDetails {
+    border: 1px solid #324960;
+    padding: 20px;
+}
+#billDetailsTable {
+    border: 0px;
+}
+
+#billDetailsTable td {
+    min-width: 20px;
+    padding-left: 10px;
+}
+/********************************************** END BILL DETAILS **************************************************/
+
+/********************************************* START SALES REPORT *************************************************/
+.reports {
+    border: 0px solid #324960;
+    margin: 10px 70px 70px;
+    padding: 0px;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+}
+.reports .header {
+    background-color: #4caf50;
+    color: white;
+    font-size: 22px;
+    padding: 8px;
+    padding-left: 20px;
+}
+.reports .content {
+    padding: 20px;
+    padding-left: 50px;
+}
+.reports a,.reports input[type=submit] {
+  background-color: white;
+  color: #4caf50;
+  border: 2px solid #4caf50;
+  font-size: 20px;
+  margin: 0px 20px;
+}
+.reports a:hover,.reports input[type=submit]:hover {
+  background-color: #4caf50;
+  color: white;
+}
+/********************************************* END SALES REPORT *************************************************/

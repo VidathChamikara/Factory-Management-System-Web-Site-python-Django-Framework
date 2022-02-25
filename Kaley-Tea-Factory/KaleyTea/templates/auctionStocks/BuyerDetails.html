@@ -1,0 +1,213 @@
+{% extends 'auctionStocks/auctionStocksMain.html' %}
+{% load widget_tweaks %}
+{% block contentHeader %}
+
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <header><h2> Final Production Management</h2></header>
+    <p>Auction Stock | Buyers</p>
+</head>
+
+<hr/>
+<ul>
+  <li><a href="/cat/cat/">Prepare A Catalog</a></li>
+  <li><a href="/allcat/all/">Auction Details</a></li>
+  <li><a href="/BuyerRead/BuyerRead/">Buyer Details</a></li>
+</ul>
+<hr/>
+
+
+<style>
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #4CAF50;
+}
+
+
+
+
+#stockbuyer {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+p1 {
+font-size: 30px;
+}
+p {
+  font-size: 35px;
+  color:red;
+}
+#stockbuyer td, #stock th {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+
+}
+
+
+#stockbuyer tr:nth-child(even){background-color: #f2f2f2;}
+
+#stockbuyer tr:hover {background-color: #ddd;}
+
+#stockbuyer th {
+font-size: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4caf50;
+  color: white;
+}
+
+td{
+  text-align: center;
+}
+
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.Ubutton {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.Dbutton {
+  background-color: #FF0000;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 25px;
+
+}
+.PDF {
+  background-color: #FFA500;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+
+</style>
+
+
+<body>
+
+<p1>Buyer Details</p1>
+<hr/>
+<table id="stockbuyer">
+  <tr>
+    <th>ID</th>
+    <th>Company Name</th>
+    <th>Register ID</th>
+    <th>Address</th>
+    <th>Phone Number</th>
+    <th>Edit</th>
+
+
+  </tr>
+    {% for buyerD in buyerDetails %}
+  <tr>
+    <td>{{ buyerD.id }}</td>
+    <td>{{ buyerD.Cname }}</td>
+    <td>{{ buyerD.regNo }}</td>
+    <td>{{ buyerD.Address }}</td>
+    <td>{{ buyerD.PNumber }}</td>
+
+    <td>
+        <a href="/editBuyer/editBuyer/{{ buyerD.id }}" class="Ubutton">Update</a>
+        <a href="/deleteBuyer/deleteBuyer/{{ buyerD.id }}" class="Dbutton">Delete</a>
+    </td>
+
+  </tr>
+
+    {% endfor %}
+
+  <tr>
+
+  </tr>
+
+</table>
+
+<hr/>
+
+
+    <div class="row">
+      <a href="/addBuyer/addBuyer/" class="button">Add Buyer</a><a href="/buyerDetailsPDF/buyerDetailsPDF/" class="PDF">Generate Report</a>
+    </div>
+
+<br/>
+<br/>
+</body>
+</html>
+
+{% endblock %}

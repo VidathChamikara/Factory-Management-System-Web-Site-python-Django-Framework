@@ -1,0 +1,110 @@
+{% extends 'Salary/BaseMenu.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block contentHeader %}
+
+<html lang="en">
+{% include 'CommonUse/messages.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>Full Details</title>
+    <link rel="stylesheet" href="{% static 'css/Salary.css' %}">
+    <script src="{% static 'js/Salary.js' %}"></script>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: #4caf50">SEARCH BY MONTH</h1>
+    <br><br>
+        <ul>
+            <li><a href="FullDetails">Search By Month</a></li>
+            <li><a href="SearchEmployee">Search by Employee</a></li>
+        </ul>
+    <br><br>
+
+    <!--------------Search Form------------------------>
+    <form class="form-inline" method="POST" action="final_salary_view_search">
+        {% csrf_token %}
+        <label>
+            <input name="searchYear" type="number" placeholder="Search Year" required>
+        </label>
+        <label>
+            <input name="searchMonth" type="number" placeholder="Search Month" required>
+        </label>
+        <button id="SearchBtn" class="button-search" onclick="displayFullTab()">SEARCH</button>
+    </form>
+    <br><br>
+
+    <div class="table-wrapper" id="displayTable" style="{{ display }}">
+        <table class="fl-table">
+            <thead><tr>
+                <th>Emp_ID</th>
+                <th>Attendance</th>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Basic <br>Salary</th>
+                <th>ETF</th>
+                <th>EPF <br> Employee</th>
+                <th>EPF <br> Employer</th>
+                <th>OT <br> Hours</th>
+                <th>OT <br> Amount</th>
+                <th>Total <br> Salary</th>
+            </tr></thead>
+
+            {% for emp_sal in emp_salary%}
+            <tr>
+                <td> {{ emp_sal.emp_id_id }} </td>
+                <td> {{ emp_sal.attendance_on_month }} </td>
+                <td> {{ emp_sal.year }} </td>
+                <td> {{ emp_sal.month }} </td>
+                <td> {{ emp_sal.basic_salary_of_month }} </td>
+                <td> {{ emp_sal.etf }} </td>
+                <td> {{ emp_sal.epf_employee }} </td>
+                <td> {{ emp_sal.epf_employer }} </td>
+                <td> {{ emp_sal.ot_hours }} </td>
+                <td> {{ emp_sal.ot_amount_for_month }} </td>
+                <td> {{ emp_sal.total_salary }} </td>
+                <td>
+                <a href="/Employee/Salary/delete_salary{{ emp_sal.emp_id_id }}" class="button button-delete" onclick="if (!confirm('Are you sure You Want to Delete?.Press Ok To Confirm.')) { return false }">Delete</a>
+{#                <form method="post" action="{% url 'delete_salary' %} ">#}
+{#                    {% csrf_token %}#}
+{#                    <input type="hidden" name="salary_id" value="{{ emp_sal.emp_id }}"/>#}
+{#                    <input type="submit" value="Delete" class="button button-delete" onclick="if (!confirm('Are you sure You Want to Delete?.Press Ok To Confirm.')) { return false }">#}
+{#                </form>#}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <button class="button button-edit-div">
+            <a href="/Employee/Salary/monthly_salary/{{ year }}/{{ month }}" class="link_button">Generate Report</a>
+        </button>
+    </div>
+</body>
+</html>
+
+{% endblock %}

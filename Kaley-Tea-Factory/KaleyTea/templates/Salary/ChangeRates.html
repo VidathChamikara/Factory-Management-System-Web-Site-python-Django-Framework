@@ -1,0 +1,50 @@
+{% extends 'Salary/BaseMenu.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block contentHeader %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Change Rates</title>
+    <link rel="stylesheet" href="{% static 'css/Salary.css' %}">
+    <script src="{% static 'js/Salary.js' %}"></script>
+</head>
+<body>
+    <h3>CHANGE RATES</h3><br><br><br>
+
+    <form id="change_rate_tab" method="POST" action="update_funds{{ Fid }}">
+        {% csrf_token %}
+        <div class="rate_table-wrapper">
+            <table class="rate_table">
+                <tr>
+                    <td>ETF : </td>
+                    <td>
+                        {{ fundForm.emp_etf }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>EPF Employee : </td>
+                    <td>
+                        {{ fundForm.epf_employee }}
+                    </td>
+                </tr>
+                <tr>
+                    <td> EPF Employer : </td>
+                    <td>
+                        {{ fundForm.epf_employer }}
+                    </td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td>
+                        <input type="submit" class="button button-edit-div" value="CHANGE">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'Transport_templates/transportationBase.html' %}
+
+<!-------------------------Title------------------------->
+{% block title %}Transportation Management{% endblock title %}
+
+<!-------------------------Styles------------------------->
+  {% block moreStyles %}
+      <style>
+ table
+    {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th
+    {
+      border: 1px solid #dddddd;
+      text-align: center;
+      font-size: 15px;
+      padding: 8px;
+      background: #a9afe7;
+    }
+
+    td
+    {
+      border: 1px solid #e7e5e5;
+      text-align: left;
+      font-size: 20px;
+      padding: 15px;
+    }
+
+    tr:nth-child(even)
+    {
+      background-color: #eae9e7;
+    }
+
+    h2 {
+      color: #082c88;
+    }
+  .btn {
+    background-color: #51ac3d;
+    border-radius: 12px;
+    padding: 8px 10px;
+    border: none;
+    transition-duration: 0.4s;
+}
+
+   .btn:hover {
+  background-color: #000000;
+  color: #51ac3d;
+}
+      </style>
+
+    {% endblock moreStyles %}
+
+<!-------------------------Body Menue------------------------->
+{% block reportBtn %}ClassActive{% endblock reportBtn %}
+
+<!-----------------------------------Header1-------------------------------------->
+{% block pageContentHeader1 %}Transportation Management{% endblock pageContentHeader1 %}
+
+<!----------------------------------Header2--------------------------------------->
+{% block pageContentHeader2 %}Analysis & Reports{% endblock pageContentHeader2 %}
+
+
+<!----------------------------------Hide Menues--------------------------------------->
+     {% block RepairMenu %}{% endblock RepairMenu %}
+     {% block vehicleRecordsMenu %}{% endblock vehicleRecordsMenu %}
+
+
+<!----------------------------------Body Content--------------------------------------->
+
+{% block content %}
+    <br>
+<!---------------------------------Messages-------------------------------------->
+    {% if messages %}
+       {% for message in messages %}
+          <script>alert("{{ message }}");</script>
+    {% endfor %}
+    {% endif %}
+
+
+  <!--Vehicle Report-->
+
+
+    <div style="padding-left: 20px;">
+    <table>
+
+        <form action="{% url 'VehicleReports' %}" method="get">
+
+            {% csrf_token %}
+
+            <h2><b>Meter Readings Report</b></h2>
+         <tr>
+            <th>Vehicle No</th>
+            <th>Month</th>
+            <th>Year</th>
+            <th></th></tr>
+
+            <td><input type="text" name="vehicleno" placeholder="Vehicle Number" required></td>
+
+            <td><input type="number" name="month" placeholder="Input Month" required></td>
+
+            <td><input type="number" name="year" placeholder="Input Year" required></td>
+
+
+
+
+          <td><input class="btn" type="submit" value="Generate" ></td><br>
+
+
+        </form>
+    </table><br><br>
+
+        <!----Service Report--->
+        <table>
+              <form action="{% url 'ServiceReports' %}" method="get">
+
+            {% csrf_token %}
+
+
+                  <h2><b>Vehicle Maintenance Report</b></h2><br>
+         <tr>
+            <th>Vehicle No</th>
+            <th>Month</th>
+            <th>Year</th>
+            <th></th></tr>
+
+            <td><input type="text" name="vehicleno" placeholder="Vehicle Number" required></td>
+
+            <td><input type="number" name="month" placeholder="Input Month" required></td>
+
+            <td><input type="number" name="year" placeholder="Input Year" required></td>
+
+
+
+
+          <td><input class="btn" type="submit" value="Generate" ></td>
+              </form>
+        </table>
+    </div>
+    <br><br>
+
+ {% endblock content %}

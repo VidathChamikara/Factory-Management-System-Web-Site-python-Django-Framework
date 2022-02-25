@@ -1,0 +1,60 @@
+{% extends "InventorySystem/sideprofile.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Profile Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br><br>
+<div class="row my-4 mt-1">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                Inventory User Details
+            </div>
+            <div class="row p-3">
+                <div class="col-md-8">
+                    <table class="table table-borderless">
+                        <thead>
+                            <span class="h4">Profile Information</span class="h4">
+
+                            <hr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Name :</th>
+                                <td>{{ user.username }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email :</th>
+                                <td>{{ user.profile.email }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Phone :</th>
+                                <td>{{ user.profile.phone }}</td>
+                            </tr>
+                             <tr>
+                                <th scope="row">First Name :</th>
+                                <td>{{ user.profile.first_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Last Name :</th>
+                                <td>{{ user.profile.last_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Address :</th>
+                                <td>{{ user.profile.address }}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4 mt-1">
+                     <a class="btn btn-info btn-lg float-right offset-md-4" href="{% url 'profile-update' %}">Edit Profiles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+{% endblock %}

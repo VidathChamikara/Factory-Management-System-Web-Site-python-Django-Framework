@@ -1,0 +1,53 @@
+
+<html>
+<style>
+tr {
+  text-align: center;
+}
+table, th, td {
+  border: 2px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+  font-size: 14px;
+}
+h1 {
+  text-align: center;
+  font-size: 30px;
+}
+
+</style>
+
+
+<body>
+
+<h1>Current Stock Details</h1>
+<hr/>
+
+<table id="stock">
+  <tr>
+    <th>ID</th>
+    <th>Stock ID</th>
+    <th>Tea Category</th>
+    <th>Total Weight</th>
+    <th>No of Packages</th>
+    <th>Date Prepared</th>
+
+  </tr>
+  {% for auctionD in auctionDetails %}
+  <tr>
+    <td>{{ auctionD.id }}</td>
+    <td>{{ auctionD.stockID }}</td>
+    <td>{{ auctionD.teacat }}</td>
+    <td>{{ auctionD.totWeight }}</td>
+    <td>{{ auctionD.packages }}</td>
+    <td>{{ auctionD.datePrepared }}</td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+<hr/>
+</body>
+
+</html>
+

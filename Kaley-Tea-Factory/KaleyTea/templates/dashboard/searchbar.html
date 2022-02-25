@@ -1,0 +1,43 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Search bar Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<br>
+<!-----------------------------Create Search bar Page-------------------------------------->
+ <div class="card card-body text-white">
+            <h2 class="text-danger text-left"><b>Search Inventory Products Items</b></h2>
+            <hr class="text-danger">
+            <table class="table table-bordered table-striped text-dark" >
+                <thead class="bg-success">
+                      <tr  class="text-center">
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">In Date</th>
+                        <th scope="col">IN Time</th>
+                        <th scope="col">Tray ID</th>
+                        <th scope="col">Temparature</th>
+                        <th scope="col">Weight(Kg)</th>
+                        <th scope="col">Out Date</th>
+                      </tr>
+                </thead>
+                {% for item in leaf %}
+                  <tr class="text-center">
+                      <th>{{ item.name }}</th>
+                      <th>{{ item.leaves_category }}</th>
+                      <th>{{ item.in_date }}</th>
+                      <th>{{ item.in_time }}</th>
+                      <th>{{ item.tray_id }}</th>
+                      <th>{{ item.temparature }}</th>
+                      <th>{{ item.tea_weight }}</th>
+                      <th>{{ item.out_date }}</th>
+                  </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+<br><br>
+{% endblock %}

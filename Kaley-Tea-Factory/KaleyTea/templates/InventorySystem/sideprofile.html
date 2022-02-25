@@ -1,0 +1,16 @@
+{% extends 'InventorySystem/base.html' %}
+{% load static %}
+{% include 'dashboard/index.html' %}
+
+{% block sideBar %}
+
+<!-- BOOSTRAP -->
+<link rel="stylesheet" href="{% static 'css/inventorycss/bootstrap.css' %}">
+
+<!-- SIDE NAVIGATION OPTIONS -->
+
+    <a href="http://127.0.0.1:8000/dashboard">Inventory Dashboard</a>
+    <a href="http://127.0.0.1:8000/profile/">User Profile</a>
+    <a href="http://127.0.0.1:8000/staff/">Inventory Staff</a>
+
+{% endblock %}

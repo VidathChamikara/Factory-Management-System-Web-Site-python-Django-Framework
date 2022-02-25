@@ -1,0 +1,33 @@
+{% extends 'supplierreg/suppliermain.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block contentHeader %}
+
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+
+<body>
+
+<form method="POST">
+       {% csrf_token %}
+<table>
+       <tr>
+            <td>User Name</td>
+            <td><input type= "text" placeholder="Enter Username" name="Username"></td>
+       </tr>
+       <tr>
+            <td>Email</td>
+            <td><input type= "text" placeholder="Enter Email" name="Emaill"></td>
+       </tr>
+       <tr>
+              <td></td>
+              <td><input type= "submit">Registration</td>
+       </tr>
+</table>
+</form>
+</body>
+</html>
+
+{% endblock %}

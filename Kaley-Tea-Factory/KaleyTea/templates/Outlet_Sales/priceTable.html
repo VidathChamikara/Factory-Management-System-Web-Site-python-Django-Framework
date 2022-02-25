@@ -1,0 +1,168 @@
+{% extends "Outlet_Sales/outleSalesMain.html" %}
+{% load widget_tweaks %}
+
+{% block priceTableActive %}classActivePage{% endblock %}
+{% block contentHeader %}
+{% include 'CommonUse/messages.html' %}
+
+<br>
+<h3 style="color: #4caf50">Outlet Sales - Add Product Price</h3>
+<!----------------------------------- START ADD NEW PRODUCT PRICE ------------------------------>
+<form class="form-inline" method="post" action="/Shop/Outlet/priceTable/">
+    {% csrf_token %}
+  <label>Product Name: </label>
+    <select name="product" id="product" class="input" required>
+        <option value="" disabled selected>Select Product...</option>
+        {% for product in addProduct %}
+           <option value="{{ product.id }}">{{ product.cp_name }}/{{ product.weight }}</option>
+        {% endfor %}
+    </select>
+  <label>Price (Rs.): </label>
+      <input class="input" placeholder="Enter Price..." type="text" name="poductprice" required>
+  <button type="submit" class="button button-edit-div">Submit</button>
+</form>
+<!----------------------------------- END ADD NEW PRODUCT PRICE ------------------------------>
+<hr><br>
+<h3 style="color: #4caf50">Outlet Sales - Price Table</h3>
+<!------------------------------------ START SEARCH BAR ----------------------------------->
+<div class="search-container search-container-price">
+    <form method="get" action="/Shop/Outlet/priceTable/">
+        <input name="search" type="text" placeholder="Search...">
+        <button type="submit" class="button button-edit" style="font-size:18px">Search</button>
+        <a href="/Shop/Outlet/priceTable/"><button type="button" class="button button-delete" style="font-size:18px">Reset</button> </a>
+    </form>
+</div>
+<!------------------------------------ END SEARCH BAR ----------------------------------->
+
+<!----------------------------------- START PRICE TABLE ------------------------------>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead><tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Weight</th>
+            <th>Price (Rs.)</th>
+            <th>Update / Delete Price</th>
+        </tr></thead>
+        <tbody>
+        {% for  product in Product %}
+            {% for price in price %}
+                {% if product.id == price.product_id %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.cp_name }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.weight }}</td>
+                    <td>Rs.{{ price.product_price }}</td>
+
+                    <td>
+                        <input type="button" value="Update" class="button button-edit" onclick="openEditForm(), editPrice({{ product.id }}, '{{ product.cp_name }}', '{{ product.category }}', '{{ product.weight }}', {{ price.product_price }})">
+                        <input type="button" value="Delete" class="button button-delete" onclick="openDeleteForm(), deletePrice({{ product.id }}, '{{ product.cp_name }}', '{{ product.category }}', '{{ product.weight }}', {{ price.product_price }})">
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+
+    </table></div><br/>
+<!----------------------------------- END PRICE TABLE ------------------------------>
+
+<!----------------------------------- START EDIT PRODUCT PRICE DIV ------------------------------>
+<div class="PriceModelBox" id="editForm">
+    <div class="modal-content-my">
+        <div class="modal-header-my">
+            <span class="close" onclick="closeEditForm()">&times;</span>
+            <p>Update Price?</p>
+        </div>
+
+        <form method="post" class="post-form" action="/Shop/Outlet/updatePrice/">
+        {% csrf_token %}
+            <div class="modal-body-my">
+                <table id="editPriceTable">
+                    <tr>
+                        <th><label>Product ID</label></th>
+                        <td style="width:20px">:</td>
+                        <td><label id="editidpass"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Name</label></th>
+                        <td>:</td>
+                        <td><label id="editname"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Category</label></th>
+                        <td>:</td>
+                        <td><label id="editcategory"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Weight</label></th>
+                        <td>:</td>
+                        <td><label id="editweight"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Price (Rs.)</label></th>
+                        <td>:</td>
+                        <td><input id="editprice" name="editprice" type="text"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer-my">
+                <td><input id="editid" name="editid" type="hidden"></td>
+                <center><button type="submit" class="button button-edit-div">UPDATE</button></center>
+            </div>
+        </form>
+    </div>
+</div>
+<!----------------------------------- END EDIT PRODUCT PRICE DIV ------------------------------>
+
+<!----------------------------------- START DELETE PRODUCT PRICE DIV ------------------------------>
+<div class="PriceModelBox" id="deleteForm">
+    <div class="modal-content-my">
+        <div class="modal-header-delete">
+            <span class="close" onclick="closeDeleteForm()">&times;</span>
+            <p>Are you sure you want to delete this item?</p>
+        </div>
+
+        <form method="post" class="post-form" action="/Shop/Outlet/removePrice/">
+        {% csrf_token %}
+            <div class="modal-body-my">
+                <table id="deletePriceTable">
+                    <tr>
+                        <th><label>Product ID</label></th>
+                        <td style="width:20px">:</td>
+                        <td><label id="deleteid"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Name</label></th>
+                        <td>:</td>
+                        <td><label id="deletename"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Category</label></th>
+                        <td>:</td>
+                        <td><label id="deletecategory"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Weight</label></th>
+                        <td>:</td>
+                        <td><label id="deleteweight"></label></td>
+                    </tr>
+                    <tr>
+                        <th><label>Price (Rs.)</label></th>
+                        <td>:</td>
+                        <td><label id="deleteprice"></label></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer-delete">
+                <input id="deleteidpass" name="deleteidpass" type="hidden">
+                <center><button type="submit" class="button button-delete-div">CONFIRM</button></center>
+            </div>
+        </form>
+    </div>
+</div>
+<!----------------------------------- END DELETE PRODUCT PRICE DIV ------------------------------>
+{% endblock %}
+

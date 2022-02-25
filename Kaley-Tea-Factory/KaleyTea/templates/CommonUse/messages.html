@@ -1,0 +1,35 @@
+<script>
+  function closeMessage() {
+    document.getElementById("message").style.display = "none";
+  }
+</script>
+<style>
+div.container-fluid {
+  overflow: hidden;
+  position: fixed;
+  background: #00ced1;
+  top: 0;
+}
+.buttonC {
+  color: #7a8087;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.buttonC:hover,
+.buttonC:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+
+{% for message in messages %}
+  <div class="container-fluid p-0" id="message">
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+        <span class="buttonC" onclick="closeMessage()">&times;</span>
+      {{ message }}
+    </div>
+  </div>
+{% endfor %}

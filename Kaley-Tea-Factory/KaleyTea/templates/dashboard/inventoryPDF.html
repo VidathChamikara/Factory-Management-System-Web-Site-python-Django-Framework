@@ -1,0 +1,66 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Inventory Report Page {% endblock %}
+
+{% block content %}
+
+<div class="col-md-6 my-4">
+        <div class="bg-white">
+            <div class="card-body">
+
+                <div class='header'>
+
+                    <p class='title'> Inventory ID : {{item.id}} </p>
+                </div>
+                <div>
+                     <div class='details'>
+                         <br><br>
+                         <table>
+                                <tr>
+                                    <td>Name :</td>
+                                    <td>{{ leaf.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Leaves Category :</td>
+                                    <td>{{ leaf.leaves_category }}</td>
+                                </tr>
+                                <tr>
+                                    <td>In Date :</td>
+                                    <td>{{ leaf.in_date }}</td>
+                                </tr>
+                                <tr>
+                                    <td>In Time:</td>
+                                    <td>{{ leaf.in_time }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tray Id:</td>
+                                    <td>{{ leaf.tray_id }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Temparature:</td>
+                                    <td>{{ leaf.temparature }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Stock Weight:</td>
+                                    <td>{{ leaf.tea_weight }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Out Date:</td>
+                                    <td>{{ leaf.out_Date}}</td>
+                                </tr>
+
+                            </table>
+
+                            <hr class='hrItem' /><br>
+
+                      </div>
+                 </div>
+                 </div>
+
+
+            </div>
+        </div>
+</div>
+
+{% endblock %}

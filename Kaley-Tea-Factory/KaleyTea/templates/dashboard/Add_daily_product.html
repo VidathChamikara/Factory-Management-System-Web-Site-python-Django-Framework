@@ -1,0 +1,100 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Add Product Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<center>
+<div class="row my-3" >
+    <div class="col-md-10">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+<br>
+<!-----------------------------Create Add Inventory Page-------------------------------------->
+
+        <div class="card card-body bg-light" style="margin-left:200px" >
+            <h2 class="text-success">Add Sub Products</h2>
+            <hr>
+            <form method="post" action="{% url 'final_production_home' %}">
+
+                {% csrf_token %}
+
+            <table>
+                <tr>
+                    <th>Sub Product ID</th>
+                    <th>{{ subID }}</th>
+                </tr>
+                <tr>
+                    <th>Tea Grade</th>
+                    <th>{{ form.teaGrade}}</th>
+                </tr>
+                <tr>
+                    <th>Weight</th>
+                    <th>{{ form.gradeWeight }}</th>
+                </tr>
+            </table>
+            <br>
+
+            <center><input type="submit" value="Add Production" class="btn btn-success btn-block"></center>
+
+        </form>
+    <br><br>
+        </div>
+    </div>
+</div>
+
+    <div class="row my-3">
+        <div class="col-md-10">
+
+         <div class="card card-body bg-light" style="margin-left:200px" >
+            <h2 class="text-success">Add Sub Products</h2>
+            <hr>
+            <table>
+        <tr>
+            <th>Main ID</th>
+            <th>Sub ID</th>
+            <th>Tea Grade</th>
+            <th>Weight</th>
+            <th>actions</th>
+        </tr>
+
+        {% for spr in finalSubProduct %}
+            <tr>
+            <td>{{ spr.id }}</td>
+            <td>{{ spr.subID }}</td>
+            <td>{{ spr.teaGrade }}</td>
+            <td>{{ spr.gradeWeight }}</td>
+
+            <td>
+                <form method="post" action="{% url 'delete_sub' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="spr" value="{{ spr.id }}"/>
+                    <input type="submit" value="Delete" class="btn btn-success btn-block"><br>
+                </form>
+            </td>
+            </tr>
+        {% endfor %}
+    </table>
+        <br>
+            <form method="post" action="{% url 'addMainFinalProduct' %}">
+            {% csrf_token %}
+                <label>Date :  </label>{{ mainForm.date }}<br><br>
+                <input type="hidden" name="sID" value="{{ subID }}">
+                <input type="submit" value="Done" class="btn btn-success btn-block">
+                <br>
+            </form>
+         <br><br>
+        </div>
+    </div>
+</div>
+</center>
+{% endblock %}

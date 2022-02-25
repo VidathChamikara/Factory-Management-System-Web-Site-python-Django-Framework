@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Monthly Report</title>
+</head>
+<body>
+    <h5> Year : {{ year }} </h5>
+    <h5> Month : {{ month }} </h5>
+    <h5> Date generated  : {{ date }} </h5><br>
+    <hr>
+    <br>
+
+    <table class="table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Employee ID</th>
+          <th scope="col">Attendance</th>
+          <th scope="col">Basic <br>Salary</th>
+          <th scope="col">ETF</th>
+          <th scope="col">EPF <br> Employee</th>
+          <th scope="col">EPF <br> Employer</th>
+          <th scope="col">OT <br> Hours</th>
+          <th scope="col">OT <br> Amount</th>
+          <th scope="col">Total <br> Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for emp_sal in emp_salary %}
+        <tr>
+            <th scope="row">{{ emp_sal.emp_id_id }}</th>
+            <td style="text-align: center"> {{ emp_sal.attendance_on_month }} </td>
+            <td style="text-align: center"> {{ emp_sal.basic_salary_of_month }} </td>
+            <td style="text-align: center"> {{ emp_sal.etf }} </td>
+            <td style="text-align: center"> {{ emp_sal.epf_employee }} </td>
+            <td style="text-align: center"> {{ emp_sal.epf_employer }} </td>
+            <td style="text-align: center"> {{ emp_sal.ot_hours }} </td>
+            <td style="text-align: center"> {{ emp_sal.ot_amount_for_month }} </td>
+            <td style="text-align: center"> {{ emp_sal.total_salary }} </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>

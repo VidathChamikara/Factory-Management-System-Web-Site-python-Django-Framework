@@ -1,0 +1,33 @@
+{% extends "InventorySystem/sidebar.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Add Product Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br><br>
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-md-8 offset-md-2">
+            <div class="border bg-light p-3">
+                <h2 class="text-danger">Inventory Staff Registration Form</h2>
+                <hr>
+                <div class="alert alert-success">
+                    <h3> Please Enter Your Valid Username and Password</h3>
+                </div>
+                <form method = "POST">
+                     {{ form|crispy }}
+                    {% csrf_token %}
+
+                    <br><br>
+                    <center>
+                        <input class="btn btn-success" type="submit" value="Register">
+                    </center>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+{% endblock %}

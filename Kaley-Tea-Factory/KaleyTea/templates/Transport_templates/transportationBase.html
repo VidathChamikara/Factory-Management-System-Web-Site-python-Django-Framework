@@ -1,0 +1,167 @@
+{% extends 'Base1.html' %}
+
+
+<!-------------------------Title------------------------->
+{% block title %}Transportaion Management{% endblock title %}
+
+
+<!-------------------------Import Head------------------------->
+
+{% block headImport %}
+<!-------------------------Import Head1------------------------->
+
+    {% block headImport1 %}{% endblock headImport1 %}
+
+<script>
+
+function NavBarFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+
+</script>
+
+
+{% endblock headImport %}
+
+
+<!-------------------------Styles------------------------->
+{% block headStyles %}
+
+{% block moreStyles %}{% endblock moreStyles %}
+<style>
+
+.ClassActive {
+    background-color: #8db8e0;
+}
+
+.ClassActive1 {
+    background-color: #2292CF;
+    color: white;
+}
+
+.topnav a:hover{
+    background-color:#EBCEFF;
+    color: black;
+    }
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+.topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+</style>
+
+{% endblock headStyles %}
+
+
+<!-------------------------Body Menue------------------------->
+{% block LinksMenuBar %}
+
+  <div class="w3-bar-block">
+  <a href="http://127.0.0.1:8000/" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white {% block homeBtn %}{% endblock homeBtn %}">Home</a>
+   <a href="{% url 'Transport' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white {% block recordsBtn %}{% endblock recordsBtn %}">Vehicle Driving Records</a>
+  <a href="{% url 'VehicleRepairs' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white {% block repairsBtn %}{% endblock repairsBtn %}">Maintenance</a>
+  <a href="{% url 'Reports' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white {% block reportBtn %}{% endblock reportBtn %}">Analysis</a>
+
+
+  </div>
+
+{% endblock LinksMenuBar %}
+
+
+<!-------------------------Page Content Header------------------------->
+
+{% block pageContentHeader %}
+
+  <!------------------------------------- Header ----------------------------->
+
+  <div class="w3-container" style="margin-top:80px" id="showcase">
+    <h1 class="w3-jumbo"><b>{% block pageContentHeader1 %}{% endblock pageContentHeader1 %}</b></h1>
+    <h1 class="w3-xxxlarge w3-text-red"><b>{% block pageContentHeader2 %}{% endblock pageContentHeader2 %}</b></h1>
+  </div>
+
+
+<!-------------------------Menue 1------------------------->
+
+    {% block vehicleRecordsMenu %}
+      <!-- Sub Menu Bar -->
+   <div class="topnav" id="myTopnav">
+
+        <a href="{% url 'Transport'%}" class="{% block addDriverBtn %}{% endblock addDriverBtn %}" >Add Driver</a>
+        <a href="{% url 'addVehicle' %}" class="{% block addVehicleBtn %}{% endblock addVehicleBtn %}" >Add Vehicle</a>
+        <a href="{% url 'vehicle_records' %}" class="{% block vehicleRecordBtn %}{% endblock vehicleRecordBtn %}">Vehicle Driving Records</a>
+        <a href="{% url 'RecordTable' %}" class="{% block recordTableBtn %}{% endblock recordTableBtn %}">Driving Records Table</a>
+
+
+        <a href="javascript:void(0);" class="icon" onclick="NavBarFunction()">☰</a>
+    </div>
+{% endblock vehicleRecordsMenu %}
+
+<!-------------------------Menue 2------------------------->
+
+       <!-- Sub Menu Bar -->
+     {% block RepairMenu %}
+ <div class="topnav" id="myTopnav">
+        <a href="{% url 'VehicleRepairs' %}" class="{% block addRepairBtn %}{% endblock addRepairBtn %}" >Vehicle Repairs</a>
+        <a href="{% url 'RepairTable'%}" class="{% block repairTableBtn %}{% endblock repairTableBtn %}" >Repair Table</a>
+
+        <a href="javascript:void(0);" class="icon" onclick="NavBarFunction()">☰</a>
+    </div>
+
+{% endblock RepairMenu %}
+
+
+
+{% endblock pageContentHeader %}
+
+
+<!----------------------------------Main Content------------------------------------------->
+<!----------------------------------------------------------------------------------------->
+
+{#{% block content %}#}
+{#    #}
+{#{% endblock content %}#}
+
+<!----------------------------------------------------------------------------------------->
