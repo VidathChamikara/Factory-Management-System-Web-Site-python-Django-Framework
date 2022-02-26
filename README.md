@@ -1,2 +1,2 @@
 # Factory-Management-System-Web-Site
-Front-end to PyCharm software and backend to MySQL workbench software
+Front-end(html,css,javascript) to PyCharm software and backend(python) to MySQL workbench software
